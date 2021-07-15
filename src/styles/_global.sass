@@ -1,0 +1,66 @@
+@import url(https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap)
+@import ~react-loader-spinner/dist/loader/css/react-spinner-loader.css
+@import ~bootstrap/scss/bootstrap
+@import ~bootstrap/scss/variables
+@import styles/colors
+
+::selection
+  color: $light-background-primary
+  background: $light-primary
+
+body
+  margin: 0
+  font-family: Poppins, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Ubuntu', 'Cantarell', 'Fira Sans', sans-serif !important
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+
+code
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace
+
+h1, h2
+  font-weight: $font-weight-bold !important
+
+h3, h4
+  font-weight: $font-weight-bolder !important
+
+h5, h6
+  font-weight: $font-weight-normal !important
+
+a
+  &:not(.nav-link):not(.btn):not(.cursor-pointer)[href]
+    text-decoration: none !important
+    color: $light-primary !important
+    &:hover
+      color: $light-secondary !important
+
+// Bootstrap modifiers
+$blue: $light-primary
+$primary: $light-primary
+
+textarea:focus, 
+textarea.form-control:focus, 
+input.form-control:focus, 
+input[type=text]:focus, 
+input[type=password]:focus, 
+input[type=email]:focus, 
+input[type=number]:focus,
+  box-shadow: inset 0 -1px 0 #ddd
+  border-color: $light-primary
+
+a
+  &.btn
+    &.btn-light
+      color: $black !important
+
+// Custom classes
+.input-pill
+  border-radius: 2rem
+.btn-pill
+  border-radius: 2rem
+  transition: box-shadow .2s ease in
+  &:hover
+    box-shadow: 0 .5rem 1rem rgba($black, .25)
+    transition: box-shadow .2s out
+.cursor-pointer
+  &:hover
+    cursor: pointer

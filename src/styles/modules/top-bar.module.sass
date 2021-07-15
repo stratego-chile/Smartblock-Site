@@ -1,0 +1,85 @@
+@import ~bootstrap/scss/bootstrap
+@import ~bootstrap/scss/variables
+@import ~bootstrap/scss/utilities
+@import styles/colors
+
+$top-bar-breakpoint: 'lg'
+
+.navBar
+  @if map-has-key($grid-breakpoints, $top-bar-breakpoint)
+    @media screen and ( max-width: map-get($grid-breakpoints, $top-bar-breakpoint) )
+      height: calc(1rem + 45px)
+      background-color: $light-background-secondary
+
+.topBarLogo
+  @extend .img-fluid
+  height: 45px
+  @if map-has-key($grid-breakpoints, $top-bar-breakpoint)
+    @media screen and ( max-width: map-get($grid-breakpoints, $top-bar-breakpoint) )
+      height: 40px
+
+.topBarSpacerHelper
+  display: none
+  @if map-has-key($grid-breakpoints, $top-bar-breakpoint)
+    @media screen and ( max-width: map-get($grid-breakpoints, $top-bar-breakpoint) )
+      display: inline-block
+      margin-right: 22px
+      padding: .25rem .75rem
+
+.navBarToggler
+  @extend .border-0
+  width: auto !important
+  height: 100%
+  background: transparent !important
+  &:focus,
+    -webkit-box-shadow: none !important
+    box-shadow: none !important
+    outline: none !important
+    background: transparent !important  
+
+.iconBar
+  background-color: $black
+  transform: rotate(0deg) translate(0px, 0px)
+  transition: ease all .2s
+  display: block
+  width: 22px
+  height: 2px
+  & + .iconBar
+    margin-top: 5px
+  
+.topBar
+  @extend .iconBar
+  transform: rotate(45deg)
+  transform-origin: 10% 10%
+.middleBar
+  @extend .iconBar
+  opacity: 0
+.bottomBar
+  @extend .iconBar
+  transform: rotate(-45deg)
+  transform-origin: 0% 50%
+
+.topBarExpanded
+  @extend .iconBar
+  transform: rotate(0)
+.middleBarExpanded
+  @extend .iconBar
+  opacity: 1
+.bottomBarExpanded
+  @extend .iconBar
+  transform: rotate(0)
+
+.topBarMainMenu
+  @if map-has-key($grid-breakpoints, $top-bar-breakpoint)
+    @media screen and ( max-width: map-get($grid-breakpoints, $top-bar-breakpoint) )
+      margin-top: .75rem
+      padding: 1.5rem
+      box-shadow: 0 .5rem 1rem rgba($black, .45)
+      background-color: rgba($light-primary, 1)
+      color: $white !important
+      margin-left: -.75rem
+      margin-right: -.75rem
+      opacity: 1
+      z-index: 12
+      a
+        color: $white !important

@@ -1,0 +1,37 @@
+@import ~bootstrap/scss/bootstrap
+@import ~bootstrap/scss/mixins
+
+.socialNetworkSignInButton
+  @extend .m-1
+  border-radius: 2.2rem
+  height: auto
+  width: auto
+  &:hover
+    @extend .shadow
+    transition-delay: .6s
+    transition: all .3s ease-in-out
+    > .socialNetworkName
+      margin-left: .6rem
+      width: auto
+      visibility: visible
+      opacity: 1
+      transition: all .3s ease-in-out
+
+.socialNetworkName
+  display: inline-block
+  width: 0rem
+  margin-left: 0rem
+  visibility: hidden
+  opacity: 0
+
+.btnLinkedIn
+  @include button-variant(#006192, #006192)
+
+.btnBitbucket
+  @include button-variant(#0c61db, #0c61db)
+
+.btnGitHub
+  @include button-variant(#333333, #333333)
+
+.btnOrange, .btnGitLab
+  @include button-variant(#fca326, #fca326)
