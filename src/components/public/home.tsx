@@ -37,7 +37,7 @@ const Home: Smartblock.Types.IsolatedComponent = () => {
         <Row>
           <Col>
             <h1 className={HomeStyles.sectionTitle}>
-              Garantizamos la trazabilidad y auditoría de sus proyectos mediante las ventajas que <b>Ethereum blockchain</b> proporciona.
+              Garantizamos la trazabilidad y auditoría de sus proyectos gracias al respaldo de la tecnología blockchain.
             </h1>
           </Col>
         </Row>
