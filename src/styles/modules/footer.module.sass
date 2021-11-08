@@ -1,23 +1,17 @@
-@import ~bootstrap/scss/bootstrap
-@import styles/colors
-  
+@use '~bootstrap/scss/bootstrap' as bs
+@use 'styles/colors' as sb_colors
+
 .footer
   height: auto
   h1, h2, h3, h4, h5, h6, p
     margin-bottom: 0rem
 
 .footerContentWrapper
-  @extend .py-2
-  @extend .d-flex
-  @extend .h-100
-  @extend .align-items-center
-  @extend .text-center
-  background-color: $light-background-secondary
+  @extend .py-2, .d-flex, .h-100, .align-items-center, .text-center
+  background-color: sb_colors.$light-background-secondary
 
 .linkWrapper
-  @extend .my-3
-  @extend .justify-content-center
+  @extend .my-3, .justify-content-center
 
 .footerLink
-  @extend .mb-3
-  @extend .mb-lg-0
+  @extend .mb-3, .mb-lg-0

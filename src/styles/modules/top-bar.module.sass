@@ -1,29 +1,28 @@
-@import ~bootstrap/scss/bootstrap
-@import ~bootstrap/scss/variables
-@import ~bootstrap/scss/utilities
-@import styles/colors
+@use '~bootstrap/scss/bootstrap' as bs
+@use 'styles/colors' as sb_colors
+@use 'sass:map'
 
 $top-bar-breakpoint: 'lg'
 
 .navBar
-  @if map-has-key($grid-breakpoints, $top-bar-breakpoint)
-    @media screen and ( max-width: map-get($grid-breakpoints, $top-bar-breakpoint) )
-      height: calc(1rem + 45px)
-      background-color: $light-background-secondary
+  @if map.has-key( bs.$grid-breakpoints, $top-bar-breakpoint )
+    @media screen and ( max-width: map.get( bs.$grid-breakpoints, $top-bar-breakpoint ) )
+      height: calc( 1rem + 45px )
+      background-color: sb_colors.$light-background-secondary
 
 .topBarLogo
   @extend .img-fluid
   height: 45px
-  @if map-has-key($grid-breakpoints, $top-bar-breakpoint)
-    @media screen and ( max-width: map-get($grid-breakpoints, $top-bar-breakpoint) )
+  @if map.has-key( bs.$grid-breakpoints, $top-bar-breakpoint )
+    @media screen and ( max-width: map.get( bs.$grid-breakpoints, $top-bar-breakpoint ) )
       height: 40px
+      margin-left: 2.8rem
 
 .topBarSpacerHelper
   display: none
-  @if map-has-key($grid-breakpoints, $top-bar-breakpoint)
-    @media screen and ( max-width: map-get($grid-breakpoints, $top-bar-breakpoint) )
+  @if map.has-key( bs.$grid-breakpoints, $top-bar-breakpoint )
+    @media screen and ( max-width: map.get( bs.$grid-breakpoints, $top-bar-breakpoint ) )
       display: inline-block
-      margin-right: 22px
       padding: .25rem .75rem
 
 .navBarToggler
@@ -31,15 +30,15 @@ $top-bar-breakpoint: 'lg'
   width: auto !important
   height: 100%
   background: transparent !important
-  &:focus,
-    -webkit-box-shadow: none !important
+  &:focus
     box-shadow: none !important
     outline: none !important
     background: transparent !important  
 
+// Responsive hamburguer button content
 .iconBar
-  background-color: $black
-  transform: rotate(0deg) translate(0px, 0px)
+  background-color: bs.$black
+  transform: rotate( 0deg ) translate( 0px, 0px )
   transition: ease all .2s
   display: block
   width: 22px
@@ -49,37 +48,76 @@ $top-bar-breakpoint: 'lg'
   
 .topBar
   @extend .iconBar
-  transform: rotate(45deg)
+  transform: rotate( 45deg )
   transform-origin: 10% 10%
+
 .middleBar
   @extend .iconBar
   opacity: 0
+
 .bottomBar
   @extend .iconBar
-  transform: rotate(-45deg)
+  transform: rotate( -45deg )
   transform-origin: 0% 50%
 
 .topBarExpanded
   @extend .iconBar
-  transform: rotate(0)
+  transform: rotate( 0 )
+
 .middleBarExpanded
   @extend .iconBar
   opacity: 1
+
 .bottomBarExpanded
   @extend .iconBar
-  transform: rotate(0)
+  transform: rotate( 0 )
+// END:Responsive hamburguer button content
 
 .topBarMainMenu
-  @if map-has-key($grid-breakpoints, $top-bar-breakpoint)
-    @media screen and ( max-width: map-get($grid-breakpoints, $top-bar-breakpoint) )
+  @if map.has-key( bs.$grid-breakpoints, $top-bar-breakpoint )
+    @media screen and ( max-width: map.get( bs.$grid-breakpoints, $top-bar-breakpoint ) )
       margin-top: .75rem
       padding: 1.5rem
-      box-shadow: 0 .5rem 1rem rgba($black, .45)
-      background-color: rgba($light-primary, 1)
-      color: $white !important
+      box-shadow: 0 .5rem 1rem rgba( bs.$black, .45 )
+      background-color: rgba( sb_colors.$light-primary, 1 )
+      color: bs.$white !important
       margin-left: -.75rem
       margin-right: -.75rem
       opacity: 1
       z-index: 12
       a
-        color: $white !important
+        color: bs.$white !important
+
+.notificationIndicator
+  @if map.has-key( bs.$grid-breakpoints, $top-bar-breakpoint )
+    @media screen and ( max-width: map.get( bs.$grid-breakpoints, $top-bar-breakpoint ) )
+      position: absolute
+      display: inline-flex
+      right: auto
+      top: .5rem
+      width: 4em
+
+.notificationBadge
+  position: absolute
+  display: inline-flex
+  margin-left: -.50rem
+  margin-bottom: -1rem !important
+  height: .8rem !important
+  width: .8rem !important
+
+.notificationToastContainer
+  position: fixed !important
+  right: 1rem !important
+  bottom: 1rem !important
+  z-index: 999
+  @if map.has-key( bs.$grid-breakpoints, $top-bar-breakpoint )
+    @media screen and ( max-width: map.get( bs.$grid-breakpoints, $top-bar-breakpoint ) )
+      display: none
+
+.notificationToastBody
+  background-color: rgba( sb_colors.$light-background-primary, .2 )
+  backdrop-filter: blur( 8px )
+
+.notificationToastHead
+  @extend .notificationToastBody
+  background-color: rgba( sb_colors.$light-background-primary, .4 )

@@ -1,10 +1,7 @@
-// import { render, screen } from '@testing-library/react';
-// import App from 'App';
+import { create as createRender } from 'react-test-renderer';
+import App from 'App';
 
-// test('renders whitespace', () => {
-//   render(<App />);
-//   const title = screen.getByText(/Sitio en construcción/i);
-//   expect(title).toBeInTheDocument();
-// });
-
-export { };
+test('render initial component configuration', () => {
+  const renderer = createRender(<App />);
+  expect(renderer.toJSON()).not.toBeUndefined();
+});

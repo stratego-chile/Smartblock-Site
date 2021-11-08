@@ -1,16 +1,7 @@
 import Swal, { SweetAlertIcon, SweetAlertResult } from 'sweetalert2';
-
-type AlertContent = {
-  title?: string;
-  text?: string;
-  innerHTML?: string;
-  mode?: 'popup' | 'toast';
-}
-
-type AlertContext = SweetAlertIcon;
-
+import { Smartblock } from 'types';
 export class Alert {
-  private static async create(content: AlertContent, context: AlertContext): Promise<SweetAlertResult<unknown>> {
+  private static async create(content: Smartblock.Types.AlertContent, context: SweetAlertIcon): Promise<SweetAlertResult<unknown>> {
     return await Swal.fire({
       icon: context,
       title: content.title,
@@ -24,23 +15,23 @@ export class Alert {
     });
   }
 
-  public static async info(content: AlertContent): Promise<SweetAlertResult<unknown>> {
+  public static async info(content: Smartblock.Types.AlertContent): Promise<SweetAlertResult<unknown>> {
     return await Alert.create(content, 'info');
   }
 
-  public static async warn(content: AlertContent): Promise<SweetAlertResult<unknown>> {
+  public static async warn(content: Smartblock.Types.AlertContent): Promise<SweetAlertResult<unknown>> {
     return await Alert.create(content, 'warning');
   }
 
-  public static async success(content: AlertContent): Promise<SweetAlertResult<unknown>> {
+  public static async success(content: Smartblock.Types.AlertContent): Promise<SweetAlertResult<unknown>> {
     return await Alert.create(content, 'success');
   }
 
-  public static async error(content: AlertContent): Promise<SweetAlertResult<unknown>> {
+  public static async error(content: Smartblock.Types.AlertContent): Promise<SweetAlertResult<unknown>> {
     return await Alert.create(content, 'error');
   }
 
-  public static async question(content: AlertContent): Promise<SweetAlertResult<unknown>> {
+  public static async question(content: Smartblock.Types.AlertContent): Promise<SweetAlertResult<unknown>> {
     return await Alert.create(content, 'question');
   }
 }

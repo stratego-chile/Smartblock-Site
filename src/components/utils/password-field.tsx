@@ -1,14 +1,12 @@
+import PasswordFieldStyles from 'styles/modules/password-field.module.sass';
 import { FC, MouseEvent, PropsWithChildren, useState } from 'react';
 import { FloatingLabelProps, FloatingLabel, Form } from 'react-bootstrap';
-import PasswordFieldStyles from 'styles/modules/password-field.module.sass';
+import { Smartblock } from 'types';
+import { useStyleModules } from 'helpers/props';
 
-type PasswordFieldProps = {
-  hideToggler?: boolean
-}
+const PasswordField: FC<FloatingLabelProps & Smartblock.Types.PasswordFieldProps> = (props: PropsWithChildren<FloatingLabelProps & Smartblock.Types.PasswordFieldProps>) => {
 
-const PasswordField: FC<FloatingLabelProps & PasswordFieldProps> = (props: PropsWithChildren<FloatingLabelProps & PasswordFieldProps>) => {
-  const {hideToggler, ...InheritFloatingLabelProps} = props;
-
+  const { hideToggler, ...floatingLabelProps } = props;
   const [visible, setVisible] = useState<boolean>(false);
 
   const handleTogglerClick = (event: MouseEvent) => {
@@ -19,7 +17,7 @@ const PasswordField: FC<FloatingLabelProps & PasswordFieldProps> = (props: Props
   };
 
   return (
-    <FloatingLabel {...InheritFloatingLabelProps} className="mb-3">
+    <FloatingLabel {...floatingLabelProps} className={useStyleModules('mb-3', props.className ?? '')}>
       <Form.Control
         type={visible ? 'text' : 'password'}
         placeholder={props.controlId}

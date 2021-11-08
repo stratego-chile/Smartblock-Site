@@ -1,45 +1,41 @@
-@import ~bootstrap/scss/bootstrap
-@import styles/variables
-@import styles/colors
-@import styles/mixins
+@use '~bootstrap/scss/bootstrap' as bs
+@use 'styles/variables' as sb_vars
+@use 'styles/colors' as sb_colors
+@use 'styles/mixins' as sb_mixins
+@use 'sass:map'
 
 .wrapper
-  @extend .my-5
-  @if map-has-key($grid-breakpoints, 'lg')
-    @media screen and ( max-width: map-get($grid-breakpoints, 'lg') )
-      @include no-horizontal-margin
+  @extend .my-5, .container-fluid
 
 .sectionTitle,
 .sectionBody
   @extend .text-start
 
 .banner
-  background: url(/assets/misc/bg-nodes-0.svg), linear-gradient(to bottom, rgba($light-background-primary, .2), rgba($light-background-primary, .5), rgba($light-background-primary, 1))
+  background: url( /assets/misc/bg-nodes-0.svg ), linear-gradient( to bottom, rgba( sb_colors.$light-background-primary, .2 ), rgba( sb_colors.$light-background-primary, .5 ), rgba( sb_colors.$light-background-primary, 1 ) )
   background-blend-mode: color
   background-size: cover
   background-repeat: no-repeat
   height: 540px
   width: 100%
   position: relative
-  @if map-has-key($grid-breakpoints, 'lg')
-    @media screen and ( max-width: map-get($grid-breakpoints, 'lg') )
-      @include no-horizontal-margin
-      @include no-horizontal-padding
+  @if map.has-key( bs.$grid-breakpoints, 'lg' )
+    @media screen and (  max-width: map.get( bs.$grid-breakpoints, 'lg' ) )
+      +sb_mixins.no-horizontal-margin
+      +sb_mixins.no-horizontal-padding
       height: auto
       padding-top: 3.5rem
       padding-bottom: 3.5rem
       background-position-x: right
 
 .bannerWrapper
-  @extend .d-flex
-  @extend .h-100
-  @extend .align-items-center
+  @extend .h-100, .align-items-center
 
 .bannerWrapperCol
   @extend .col
 
 .bannerTryWrapper
-  background: url(/assets/misc/bg-0.jpg), rgba($dark-background-primary, .5)
+  background: url( /assets/misc/bg-0.jpg ), rgba( sb_colors.$dark-background-primary, .5 )
   background-blend-mode: color
   background-position-y: center
   background-size: cover
@@ -52,9 +48,9 @@
 
 .bannerTitle
   @extend .text-start
-  color: $light-primary !important
-  font-weight: $font-weight-black !important
+  color: sb_colors.$light-primary !important
+  font-weight: sb_vars.$font-weight-black !important
   font-size: 3.5em
-  @if map-has-key($grid-breakpoints, 'lg')
-    @media screen and ( max-width: map-get($grid-breakpoints, 'lg') )
+  @if map.has-key( bs.$grid-breakpoints, 'lg' )
+    @media screen and (  max-width: map.get( bs.$grid-breakpoints, 'lg' ) )
       font-size: 2.5em

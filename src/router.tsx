@@ -1,27 +1,23 @@
-import { FC, useEffect, useState, Suspense } from 'react';
-import { Switch, Route, Redirect, RouteProps} from 'react-router-dom';
-import { injectQueryParams, RouteConfig} from 'helpers/routes';
-import { Smartblock } from 'types';
-import { Hasher } from 'helpers/hasher';
+import { FC, useEffect, useState, Suspense, lazy } from 'react';
+import { Switch, Route, Redirect, RouteProps, HashRouter, BrowserRouter } from 'react-router-dom';
 import { SessionProvider } from 'providers/session';
+import { RoutesMap } from 'routes/map';
+import { Smartblock } from 'types';
 import SuspenseFallback from 'components/utils/suspense-fallback';
-import TopBar from 'components/shared/top-bar';
-import Footer from 'components/shared/footer';
-import RoutesMap from 'helpers/routes';
 
-export type RedirectType = {
-  from: string;
-  to: string;
-  strict?: boolean;
-}
-
-export const PublicRoute: FC<RouteProps> = (props) => <Route {...props} />;
+export const PublicRoute: FC<RouteProps> = (props) => {
+  if (SessionProvider.isAuthenticated()) {
+    return <Redirect to={RoutesMap.dashboard.path} />;
+  } else {
+    return <Route {...props} />;
+  }
+};
 
 export const PrivateRoute: FC<RouteProps> = (props) => {
   if (!SessionProvider.isAuthenticated()) {
-    return <Redirect to={RoutesMap.noSession.path + injectQueryParams({
-      resource: Hasher.encode.Base64(props.path?.toString() as string)
-    })} />;
+    return <Route
+      {...props}
+      component={lazy(() => import('components/errors/no-session'))} />;
   } else {
     return <Route {...props} />;
   }
@@ -29,8 +25,8 @@ export const PrivateRoute: FC<RouteProps> = (props) => {
 
 const Routes: Smartblock.Types.IsolatedComponent = () => {
 
-  const [routes, setRoutes] = useState<RouteConfig[]>([]);
-  const [redirects, setRedirects] = useState<RedirectType[]>([]);
+  const [routes, setRoutes] = useState<Smartblock.Types.RouteConfig[]>([]);
+  const [redirects, setRedirects] = useState<Smartblock.Types.RedirectType[]>([]);
 
   const getRoutes = (): JSX.Element[] => routes.filter(
     route => route.path !== '**' // Prevents load of the default route. This allows the rendering of the redirects declared bellow
@@ -56,7 +52,7 @@ const Routes: Smartblock.Types.IsolatedComponent = () => {
   );
 
   const getSymlinks = (): JSX.Element[] => redirects.map(
-    (redirect: RedirectType, index: string | number) =>
+    (redirect: Smartblock.Types.RedirectType, index: string | number) =>
       <Redirect
         exact
         key={index}
@@ -66,8 +62,8 @@ const Routes: Smartblock.Types.IsolatedComponent = () => {
   );
 
   const getRoutesAndRedirects = () => {
-    const $routes: RouteConfig[] = [];
-    const $redirects: RedirectType[] = [];
+    const $routes: Smartblock.Types.RouteConfig[] = [];
+    const $redirects: Smartblock.Types.RedirectType[] = [];
     for (const routeId in RoutesMap) {
       const routeConfig = RoutesMap[routeId];
       $routes.push(routeConfig);
@@ -85,20 +81,24 @@ const Routes: Smartblock.Types.IsolatedComponent = () => {
 
   useEffect(() => getRoutesAndRedirects(), []);
 
-  return (
-    <Suspense fallback={SuspenseFallback()}>
-      <TopBar />
-      <Switch>
-        {getRoutes()}
-        {getSymlinks()}
-        { /* Default route */ }
-        <Route
-          path={RoutesMap.default.path}
-          component={RoutesMap.default.component} />
-      </Switch>
-      <Footer />
-    </Suspense>
-  );
+  const RouterInnerConfig = <Suspense fallback={SuspenseFallback()}>
+    <Switch>
+      {getRoutes()}
+      {getSymlinks()}
+      { /* Default route */ }
+      <Route
+        path={RoutesMap.default.path}
+        component={RoutesMap.default.component} />
+    </Switch>
+  </Suspense>;
+
+  return process.env.REACT_APP_DEPLOY_PLATFORM === 'code-deploy'
+    ? <HashRouter basename={process.env.PUBLIC_URL}>
+      {RouterInnerConfig}  
+    </HashRouter>
+    : <BrowserRouter basename={process.env.PUBLIC_URL}>
+      {RouterInnerConfig}
+    </BrowserRouter>;
 };
 
 export default Routes;

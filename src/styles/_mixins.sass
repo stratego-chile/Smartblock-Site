@@ -5,3 +5,8 @@
 @mixin no-horizontal-margin
   margin-left: 0px !important
   margin-right: 0px !important
+
+@mixin disabled-element-hover
+  &:disabled, &[disabled]
+    cursor: not-allowed !important
+    pointer-events: all !important

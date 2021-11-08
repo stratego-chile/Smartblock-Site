@@ -1,11 +1,16 @@
+import FooterStyles from 'styles/modules/footer.module.sass';
 import { Container, Row, Col } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import FooterStyles from 'styles/modules/footer.module.sass';
 import { Smartblock } from 'types';
+import { useEffect, useState } from 'react';
 
 const Footer: Smartblock.Types.IsolatedComponent = () => {
 
-  const currentYear = new Date().getFullYear();
+  const [currentYear, setCurrentYear] = useState<number | null>(null);
+
+  useEffect(() => {
+    setCurrentYear(new Date().getFullYear());
+  }, []);
 
   return (
     <Container fluid className={FooterStyles.footer}>
@@ -32,7 +37,9 @@ const Footer: Smartblock.Types.IsolatedComponent = () => {
       </Row>
       <Row className={FooterStyles.footerContentWrapper}>
         <Col>
-          <p>{currentYear} &copy; <b>Smartblock Technologies</b> SpA</p>
+          <p>
+            {currentYear}&nbsp;&copy;&nbsp;<b>Smartblock Technologies SpA</b>
+          </p>
         </Col>
       </Row>
     </Container>

@@ -2,13 +2,13 @@ import { Smartblock } from 'types';
 import { Container, Row, Col } from 'react-bootstrap';
 import Layout from 'helpers/layout';
 
-const AboutCookies: Smartblock.Types.IsolatedComponent = () => {
+const NotAvailable: Smartblock.Types.IsolatedComponent = () => {
   return (
-    <Layout pageTitle='Cookies'>
+    <Layout pageTitle='Recurso no disponible'>
       <Container className="my-5">
         <Row>
-          <Col>
-            <h1>Sobre el uso y configuraciones de las cookies</h1>
+          <Col className="text-center">
+            <h1>Resource not available. Please, try again later</h1>
           </Col>
         </Row>
       </Container>
@@ -16,4 +16,4 @@ const AboutCookies: Smartblock.Types.IsolatedComponent = () => {
   );
 };
 
-export default AboutCookies;
+export default NotAvailable;

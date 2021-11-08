@@ -3,19 +3,10 @@ import { FormEvent, useState } from 'react';
 import { Col, Row, Form, FloatingLabel, Button } from 'react-bootstrap';
 import { Smartblock } from 'types';
 
-type ContactFormState = {
-  submitting: boolean;
-  firstName?: string;
-  lastName?: string;
-  email?: string;
-  message?: string;
-  captcha?: string;
-}
-
 const ContactForm: Smartblock.Types.IsolatedComponent = () => {
 
-  const [state, setState] = useState<ContactFormState>({
-    submitting: false,
+  const [state, setState] = useState<Smartblock.Types.ContactFormState>({
+    isSubmitting: false,
   });
 
   const handleFormChange = (event: FormEvent) => {
@@ -65,7 +56,7 @@ const ContactForm: Smartblock.Types.IsolatedComponent = () => {
       </Row>
       <Row>
         <Col className="text-center">
-          <Button variant="dark" size="lg" type="submit" className="btn-pill" disabled={state?.submitting}>
+          <Button variant="dark" size="lg" type="submit" className="btn-pill" disabled={state?.isSubmitting}>
             Enviar
           </Button>
         </Col>

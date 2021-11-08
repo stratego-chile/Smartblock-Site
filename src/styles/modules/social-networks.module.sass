@@ -1,15 +1,13 @@
-@import ~bootstrap/scss/bootstrap
-@import ~bootstrap/scss/mixins
+@use '~bootstrap/scss/bootstrap' as bs
 
 .socialNetworkSignInButton
   @extend .m-1
-  border-radius: 2rem
+  border-radius: 2.2rem
   height: auto
   width: auto
-  padding-left: .95rem
-  padding-right: .95rem
   &:hover
     @extend .shadow
+    transition-delay: .6s
     transition: all .3s ease-in-out
     > .socialNetworkName
       margin-left: .6rem
@@ -24,18 +22,11 @@
   margin-left: 0rem
   visibility: hidden
   opacity: 0
-  transition: all .3s ease-in-out, visibility 0s
 
 .btnLinkedIn
-  @include button-variant(#006192, #006192)
-
-.btnGoogle
-  padding-left: .9rem !important
-  padding-right: .9rem !important
-
-.btnMicrosoft
-  @include button-variant(#51aed9, #51aed9)
-  color: white !important
+  @extend .btn-primary
+  @include bs.button-variant(#006192, #006192)
 
 .btnSlack
-  @include button-variant(whitesmoke, #ededed)
+  @extend .btn-light
+  @include bs.button-variant(whitesmoke, #ededed)

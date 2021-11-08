@@ -34,6 +34,21 @@ export class Logger {
   public put(...contents: Array<unknown>): void {
     LoggerModeHelper[this._config.mode](contents.join(' '));
   }
+
+  public static printConsoleWarnings(): void {
+    console.log(
+      '%cHOLD UP! Are you sure what are you doing?, any action executed here could expose your data and/or break the application',
+      'background: white; color: blue; font-size: x-large'
+    );
+    console.log(
+      '%cIf you want to make a report or feedback create a new issue in https://github.com/SmartblockTech/Site/issues. Please contact us to resolve your questions.',
+      'background: blue; color: white; font-size: large;'
+    );
+    console.log(
+      '%cThis project is licensed under the MIT license terms. To access to the source code, go to https://github.com/SmartblockTech/Site',
+      'background: black; color: whitesmoke; font-size: large;'
+    );
+  }
 }
 
 export class StaticLogger {

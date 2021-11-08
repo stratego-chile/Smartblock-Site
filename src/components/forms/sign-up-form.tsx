@@ -1,24 +1,15 @@
-import { FC, FormEvent, useState } from 'react';
+import { FC, FormEvent, useState, useEffect } from 'react';
 import { Form, Row, Col, FloatingLabel, Button } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGoogle, faLinkedin, faMicrosoft, faSlack } from '@fortawesome/free-brands-svg-icons';
-import { generateQueryParams, useStyleModules } from 'helpers/props';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Hasher } from 'helpers/hasher';
+import { Smartblock } from 'types';
 import PasswordField from 'components/utils/password-field';
-import SocialNetworksStyles from 'styles/modules/social-networks.module.sass';
-
-type SmartblockSignUpState = {
-  username?: string;
-  email?: string;
-  password?: string;
-  passwordConfirm?: string;
-  isSubmitting?: boolean;
-}
+import SocialNetworks from 'components/utils/social-networks';
+import SubmitButton from 'components/utils/submit-button';
+import { injectQueryParams } from 'helpers/route';
 
 const SignUpForm: FC<Record<string, never>> = () => {
-
-  const [state, setState] = useState<SmartblockSignUpState>({
+  const [state, setState] = useState<Smartblock.Types.SignUpFormState>({
     username: '',
     email: '',
     password: '',
@@ -26,28 +17,12 @@ const SignUpForm: FC<Record<string, never>> = () => {
     isSubmitting: false
   });
 
-  const handleRegularSignUpSubmit = async (event: FormEvent) => {
-    if (event.isTrusted) {
-      event.preventDefault();
-      setTimeout(() => {
-        setState({
-          ...state,
-          isSubmitting: false
-        });
-      }, 5000);
-      setState({
-        ...state,
-        isSubmitting: true
-      });
-    }
-  };
-
   const handleFormChange = (event: FormEvent) => {
     if (event.isTrusted) {
       const control = event.nativeEvent.target as HTMLInputElement;
       if (Object.keys(state).includes(control.id)) {
         const handledValue = control.id.toLowerCase().includes('password')
-          ? (control.value ? Hasher.create.SHA512(control.value) : '')
+          ? (control.value ? Hasher.hash.asSHA512(control.value) : '')
           : control.id.toLowerCase().includes('email')
             ? Hasher.encode.Base64(control.value)
             : '';
@@ -59,15 +34,36 @@ const SignUpForm: FC<Record<string, never>> = () => {
     }
   };
 
+  const handleFormSubmit = async (event: FormEvent) => {
+    if (event.isTrusted) {
+      event.preventDefault();
+      setState({
+        ...state,
+        isSubmitting: true
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (state.isSubmitting) {
+      const fakeRequest = async () => {
+        return new Promise<boolean>((resolve) => {
+          setTimeout(() => {
+            resolve(false);
+          }, 3000);
+        });
+      };
+      fakeRequest().then(isSubmitting => {
+        setState({
+          ...state,
+          isSubmitting
+        });
+      });
+    }
+  }, [state.isSubmitting]);
+
   return (
-    <Form onSubmit={handleRegularSignUpSubmit} onChange={handleFormChange}>
-      <Row>
-        <Col>
-          <code>
-            {JSON.stringify(state)}
-          </code>
-        </Col>
-      </Row>
+    <Form onSubmit={handleFormSubmit} onChange={handleFormChange}>
       <Row>
         <Col className="text-center my-5">
           <h2>Crea una cuenta gratuita</h2>
@@ -99,57 +95,20 @@ const SignUpForm: FC<Record<string, never>> = () => {
       </Row>
       <Row className="my-4">
         <Col className="d-grid gap-3">
-          <Button variant="dark" type="submit" size="lg" className="btn-pill">
-            Registrarme
-          </Button>
-          <LinkContainer to={'/sign-in' + generateQueryParams({ r: true })}>
+          <SubmitButton
+            variant="dark"
+            size="lg"
+            className="btn-pill"
+            defaultContent="Registrarme"
+            submitting={!!state.isSubmitting} />
+          <LinkContainer to={'/sign-in' + injectQueryParams({ r: true })}>
             <Button variant="outline-secondary" type="button" role="button" size="lg" className="btn-pill">
               Ya tengo cuenta
             </Button>
           </LinkContainer>
         </Col>
       </Row>
-      <Row>
-        <Col className="text-center my-4">
-          <h5>O entra con</h5>
-        </Col>
-      </Row>
-      <Row>
-        <Col className="text-center">
-          <Button
-            variant="primary"
-            type="button"
-            role="button"
-            className={useStyleModules(SocialNetworksStyles.socialNetworkSignInButton, SocialNetworksStyles.btnLinkedIn)}
-            size="lg">
-            <FontAwesomeIcon icon={faLinkedin} /><span className={SocialNetworksStyles.socialNetworkName}>Linkedin</span>
-          </Button>
-          <Button
-            variant="primary"
-            type="button"
-            role="button"
-            className={useStyleModules(SocialNetworksStyles.socialNetworkSignInButton, SocialNetworksStyles.btnGoogle)}
-            size="lg">
-            <FontAwesomeIcon icon={faGoogle} /><span className={SocialNetworksStyles.socialNetworkName}>Google</span>
-          </Button>
-          <Button
-            variant="dark"
-            type="button"
-            role="button"
-            className={useStyleModules(SocialNetworksStyles.socialNetworkSignInButton, SocialNetworksStyles.btnMicrosoft)}
-            size="lg">
-            <FontAwesomeIcon icon={faMicrosoft} /><span className={SocialNetworksStyles.socialNetworkName}>Microsoft</span>
-          </Button>
-          <Button
-            variant="light"
-            type="button"
-            role="button"
-            className={useStyleModules(SocialNetworksStyles.socialNetworkSignInButton, SocialNetworksStyles.btnSlack)}
-            size="lg">
-            <FontAwesomeIcon icon={faSlack} /><span className={SocialNetworksStyles.socialNetworkName}>Slack</span>
-          </Button>
-        </Col>
-      </Row>
+      <SocialNetworks onOptionSelection={(config) => { console.log(config); }} />
     </Form>
   );
 };
