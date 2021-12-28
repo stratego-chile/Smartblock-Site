@@ -3,7 +3,7 @@ import { FormEvent, useState } from 'react';
 import { Col, Row, Form, FloatingLabel, Button } from 'react-bootstrap';
 import { Smartblock } from 'types';
 
-const ContactForm: Smartblock.Types.IsolatedComponent = () => {
+const ContactForm: Smartblock.Types.IsolatedComponent = (): JSX.Element => {
 
   const [state, setState] = useState<Smartblock.Types.ContactFormState>({
     isSubmitting: false,

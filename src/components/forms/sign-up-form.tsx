@@ -1,4 +1,4 @@
-import { FC, FormEvent, useState, useEffect } from 'react';
+import { FormEvent, useState, useEffect } from 'react';
 import { Form, Row, Col, FloatingLabel, Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Hasher } from 'helpers/hasher';
@@ -7,8 +7,10 @@ import PasswordField from 'components/utils/password-field';
 import SocialNetworks from 'components/utils/social-networks';
 import SubmitButton from 'components/utils/submit-button';
 import { injectQueryParams } from 'helpers/route';
+import { EMPTY_STRING } from 'helpers/constants';
+import { Logger } from 'helpers/logger';
 
-const SignUpForm: FC<Record<string, never>> = () => {
+const SignUpForm: Smartblock.Types.IsolatedComponent = (): JSX.Element => {
   const [state, setState] = useState<Smartblock.Types.SignUpFormState>({
     username: '',
     email: '',
@@ -16,25 +18,21 @@ const SignUpForm: FC<Record<string, never>> = () => {
     passwordConfirm: '',
     isSubmitting: false
   });
+  const [isFormValid, setFormValid] = useState<boolean>(false);
 
   const handleFormChange = (event: FormEvent) => {
     if (event.isTrusted) {
       const control = event.nativeEvent.target as HTMLInputElement;
       if (Object.keys(state).includes(control.id)) {
-        const handledValue = control.id.toLowerCase().includes('password')
-          ? (control.value ? Hasher.hash.asSHA512(control.value) : '')
-          : control.id.toLowerCase().includes('email')
-            ? Hasher.encode.Base64(control.value)
-            : '';
         setState({
           ...state,
-          [control.id]: handledValue
+          [control.id]: control.value ?? EMPTY_STRING
         });
       }
     }
   };
 
-  const handleFormSubmit = async (event: FormEvent) => {
+  const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     if (event.isTrusted) {
       event.preventDefault();
       setState({
@@ -45,6 +43,23 @@ const SignUpForm: FC<Record<string, never>> = () => {
   };
 
   useEffect(() => {
+    if (
+      state.username && state.username !== EMPTY_STRING &&
+      state.email && state.email !== EMPTY_STRING &&
+      state.password && state.password !== EMPTY_STRING &&
+      state.passwordConfirm && state.passwordConfirm !== EMPTY_STRING
+    ) {
+      if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(state.email)) {
+        setFormValid(true);
+      } else {
+        setFormValid(false);
+      }
+    } else {
+      setFormValid(false);
+    }
+  }, [state.username, state.email, state.password, state.passwordConfirm]);
+
+  useEffect(() => {
     if (state.isSubmitting) {
       const fakeRequest = async () => {
         return new Promise<boolean>((resolve) => {
@@ -53,12 +68,26 @@ const SignUpForm: FC<Record<string, never>> = () => {
           }, 3000);
         });
       };
-      fakeRequest().then(isSubmitting => {
+      if (isFormValid) {
+        const signUpData: Smartblock.Types.SignUpForm = {
+          username: Hasher.encode.Base64(state.username as string),
+          email: Hasher.encode.Base64(state.email as string),
+          password: Hasher.hash.asSHA512(state.password as string),
+          passwordConfirm: Hasher.hash.asSHA512(state.passwordConfirm as string)
+        };
+        fakeRequest().then(isSubmitting => {
+          console.log(signUpData);
+          setState({
+            ...state,
+            isSubmitting
+          });
+        });
+      } else {
         setState({
           ...state,
-          isSubmitting
+          isSubmitting: false
         });
-      });
+      }
     }
   }, [state.isSubmitting]);
 
@@ -90,7 +119,7 @@ const SignUpForm: FC<Record<string, never>> = () => {
       </Row>
       <Row>
         <Col>
-          <PasswordField controlId="passwordConfirm" label="Confirma tu contraseña" hideToggler={true} />
+          <PasswordField controlId="passwordConfirm" label="Confirma tu contraseña" compareWith={state.password} hideToggler={false} hidden={!state.password} />
         </Col>
       </Row>
       <Row className="my-4">
@@ -100,6 +129,7 @@ const SignUpForm: FC<Record<string, never>> = () => {
             size="lg"
             className="btn-pill"
             defaultContent="Registrarme"
+            disabled={!isFormValid}
             submitting={!!state.isSubmitting} />
           <LinkContainer to={'/sign-in' + injectQueryParams({ r: true })}>
             <Button variant="outline-secondary" type="button" role="button" size="lg" className="btn-pill">
@@ -108,7 +138,7 @@ const SignUpForm: FC<Record<string, never>> = () => {
           </LinkContainer>
         </Col>
       </Row>
-      <SocialNetworks onOptionSelection={(config) => { console.log(config); }} />
+      <SocialNetworks onOptionSelection={(config) => { new Logger().put(JSON.stringify(config)); }} />
     </Form>
   );
 };
