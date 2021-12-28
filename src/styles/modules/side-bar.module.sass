@@ -1,0 +1,134 @@
+@use '~bootstrap/scss/bootstrap' as bs
+@use 'styles/colors' as sb_colors
+@use 'styles/mixins' as sb_mixins
+@use 'sass:map'
+
+$default-breakpoint: 'lg'
+
+@keyframes borderBottomRadiusChange
+  from
+    border-bottom-left-radius: 0px
+    border-bottom-right-radius: 0px
+  to
+    border-bottom-left-radius: 10px
+    border-bottom-right-radius: 10px
+
+.sideBarToggler
+  position: fixed
+  width: auto
+  margin-top: .9rem
+  z-index: 25
+  border-radius: 0px 10px 10px 0px
+  border-width: 0px !important
+  background-color: sb_colors.$dark-gray
+  height: 3rem
+
+.wrapper
+  overflow-y: scroll !important
+  overflow-x: hidden !important
+  transition: all .4s
+  padding: 0px
+  position: relative
+  display: block
+  z-index: 48
+  @if map.has-key( bs.$grid-breakpoints, $default-breakpoint )
+    @media screen and ( max-width: map.get( bs.$grid-breakpoints, $default-breakpoint ) )
+      position: fixed
+      display: flex
+  *
+    overflow-x: hidden !important
+
+.sideBar
+  position: fixed
+  background-color: #373737
+  height: 100vh
+  width: inherit
+  display: flex
+  flex-direction: column
+  overflow: auto
+
+.sideBarSub
+  margin-top: 32px
+  flex-grow: 1
+
+.noWidth
+  width: 0px !important
+
+.simpleList
+  list-style: none
+  padding-left: 0rem
+
+.moduleContainer
+  margin-bottom: 25px
+
+.togglerButton
+  @extend .shadow
+  text-align: left
+  background-color: sb_colors.$dark-background-primary
+  border-width: 0
+  border-radius: 0px
+  height: 50px
+  transition: all 0.2s
+  animation-name: borderBottomRadiusChange
+  animation-duration: 0.2s
+  @include sb_mixins.no-wrap-text
+  &:hover
+    background: lighten(sb_colors.$dark-background-primary, 5%)
+  &:focus
+    background: lighten(sb_colors.$dark-background-primary, 7%)
+  &::before
+    content: ''
+    background-color: rgba(black, 0)
+    display: block
+    position: absolute
+    height: 50px
+    width: 95%
+    margin-left: -.8rem
+    margin-top: -1rem
+    border-radius: 10px
+
+.base
+  border-radius: 10px
+
+.focused
+  border-radius: 10px 10px 0px 0px
+  &::before
+    border-radius: 10px 10px 0px 0px
+
+.linksContainer
+  border-radius: 0px 0px 10px 10px
+  background-color: sb_colors.$dark-gray
+  -webkit-transition: height 0.8s
+  -moz-transition: height 0.8s
+  transition: height 0.8s ease-in-out
+  padding-top: .5rem
+  padding-bottom: 1rem
+  position: relative
+  z-index: 12
+  @include sb_mixins.no-wrap-text
+  &.shown
+    height: 100%
+  &.hidden
+    height: 0px
+  ul
+    @extend .simpleList
+
+.sideBarLink
+  color: sb_colors.$gray !important
+  padding: 0.375rem 0.75rem
+  font-size: 13px
+  font-weight: normal
+  &:hover
+    text-decoration: none
+    color: lighten(sb_colors.$gray, 5%) !important
+    transition: all .2s
+
+.pureLink
+  @include sb_mixins.no-wrap-text
+  font-size: 13px
+  color: #8E8E8E !important
+  &:hover
+    color: lighten(#8E8E8E, 5%) !important
+
+.pureLinksContainer
+  @include sb_mixins.no-wrap-text
