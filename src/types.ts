@@ -1,9 +1,10 @@
-import { FC, MouseEvent } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import { FC, MouseEvent, LazyExoticComponent, ComponentType } from 'react';
 
 export namespace Smartblock.Types {
   //#region Misc
   export type IsolatedComponent = FC<Record<string | symbol, never>>;
+
+  export type LazyComponent = LazyExoticComponent<IsolatedComponent>;
 
   export type SocialNetworkConfig = {
     tag: string;
@@ -33,15 +34,23 @@ export namespace Smartblock.Types {
   //#endregion
 
   //#region Router
+  export type RouteConfigLazy = {
+    useComponent: () => LazyExoticComponent<ComponentType> | JSX.Element;
+    isLazy: true;
+  }
+
+  export type RouteConfigSync = {
+    useComponent: () => JSX.Element;
+    isLazy?: false;
+  }
+
   export type RouteConfig = {
     path: string;
     public: boolean;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    component: React.ComponentType<RouteComponentProps<any>> | React.ComponentType<any>;
     strict?: boolean;
     symlinks?: string[];
     data?: unknown;
-  }
+  } & (RouteConfigLazy | RouteConfigSync);
   
   export type RoutesMapper = Record<string, RouteConfig>;
 
@@ -59,16 +68,28 @@ export namespace Smartblock.Types {
   //#endregion
 
   //#region Business structures
+  export type SessionData = {
+    token: string;
+    tokenType: 'jwt' | 'sdt';
+    isTokenEncoded?: boolean;
+    createdAt?: number;
+  }
+  
+  export type Session = {
+    cookie: string | null;
+    data: string | SessionData | null;
+  }
+
   export type SignUpForm = {
-    username?: string;
-    email?: string;
-    password?: string;
-    passwordConfirm?: string;
+    username: string;
+    email: string;
+    password: string;
+    passwordConfirm: string;
   };
 
   export type SignInForm = {
-    username?: string;
-    password?: string;
+    username: string;
+    password: string;
     rememberMe?: boolean;
   };
 
@@ -101,9 +122,9 @@ export namespace Smartblock.Types {
     isSubmitting?: boolean;
   };
 
-  export type SignUpFormState = FormState & SignUpForm;
+  export type SignUpFormState = FormState & Partial<SignUpForm>;
 
-  export type SignInFormState = FormState & SignInForm;
+  export type SignInFormState = FormState & Partial<SignInForm>;
 
   export type ContactFormState = FormState & ContactForm;
 
@@ -115,14 +136,13 @@ export namespace Smartblock.Types {
   //#region Props
   export type SubmitButtonProps = {
     submitting: boolean;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    defaultContent: string | JSX.Element | React.ComponentType<RouteComponentProps<any>> | React.ComponentType<any>;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    loadingContent?: string | JSX.Element | React.ComponentType<RouteComponentProps<any>> | React.ComponentType<any>;
+    defaultContent: string | JSX.Element;
+    loadingContent?: string | JSX.Element;
   }
 
   export type PasswordFieldProps = {
-    hideToggler?: boolean
+    hideToggler?: boolean;
+    compareWith?: string;
   }
 
   export type SocialNetworksProps = {
