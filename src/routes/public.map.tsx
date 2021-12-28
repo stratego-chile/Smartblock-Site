@@ -1,12 +1,19 @@
 import { lazy } from 'react';
 import { Smartblock } from 'types';
-import Home from 'components/public/home';
+import Home from 'pages/public/home';
+import PrivacyPolicy from 'pages/public/privacy-policy';
+import TermsOfService from 'pages/public/terms-of-service';
+import AboutCookies from 'pages/public/about-cookies';
+import NotAvailable from 'pages/errors/not-available';
+
+const LazySignUP: Smartblock.Types.LazyComponent = lazy(() => import('pages/public/sign-up'));
+const LazySignIn: Smartblock.Types.LazyComponent = lazy(() => import('pages/public/sign-in'));
 
 export const PublicRoutesMap: Smartblock.Types.RoutesMapper = {
   home: {
     path: '/inicio',
     public: true,
-    component: Home,
+    useComponent: () => <Home />,
     strict: true,
     symlinks: [
       '/',
@@ -17,7 +24,7 @@ export const PublicRoutesMap: Smartblock.Types.RoutesMapper = {
   privacyPolicy: {
     path: '/privacy-policy',
     public: true,
-    component: lazy(() => import('components/public/privacy-policy')),
+    useComponent: () => <PrivacyPolicy />,
     symlinks: [
       '/pp'
     ]
@@ -25,7 +32,7 @@ export const PublicRoutesMap: Smartblock.Types.RoutesMapper = {
   termsOfService: {
     path: '/terms-of-service',
     public: true,
-    component: lazy(() => import('components/public/terms-of-service')),
+    useComponent: () => <TermsOfService />,
     symlinks: [
       '/tos'
     ]
@@ -33,7 +40,7 @@ export const PublicRoutesMap: Smartblock.Types.RoutesMapper = {
   aboutCookies: {
     path: '/about-cookies',
     public: true,
-    component: lazy(() => import('components/public/about-cookies')),
+    useComponent: () => <AboutCookies />,
     symlinks: [
       '/ac'
     ]
@@ -41,7 +48,7 @@ export const PublicRoutesMap: Smartblock.Types.RoutesMapper = {
   notAvailable: {
     path: '/not-available',
     public: true,
-    component: lazy(() => import('components/errors/not-available')),
+    useComponent: () => <NotAvailable />,
     symlinks: [
       '/under-maintenance'
     ]
@@ -50,7 +57,8 @@ export const PublicRoutesMap: Smartblock.Types.RoutesMapper = {
     path: '/sign-up',
     public: true,
     strict: true,
-    component: lazy(() => import('components/public/sign-up')),
+    isLazy: true,
+    useComponent: () => <LazySignUP />,
     symlinks: [
       '/register',
       '/registrar',
@@ -61,7 +69,8 @@ export const PublicRoutesMap: Smartblock.Types.RoutesMapper = {
     path: '/sign-in',
     public: true,
     strict: true,
-    component: lazy(() => import('components/public/sign-in')),
+    isLazy: true,
+    useComponent: () => <LazySignIn />,
     symlinks: [
       '/login',
       '/entrar',
