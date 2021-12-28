@@ -1,7 +1,7 @@
 export class RouteAnalyzerHelper {
-  private static _currentPath = () => {
-    return window.location.pathname;
-  }
+
+  private static _currentPath = () => window.location.pathname;
+
   public static isPathEqualsTo(path: string): boolean {
     if (path.includes(':')) {
       path = path.split(':').pop() as string;
