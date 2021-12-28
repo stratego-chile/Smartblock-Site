@@ -1,8 +1,9 @@
 @use '~bootstrap/scss/bootstrap' as bs
+@use 'styles/variables' as sb_vars
 
 .socialNetworkSignInButton
   @extend .m-1
-  border-radius: 2.2rem
+  border-radius: sb_vars.$default-border-radius
   height: auto
   width: auto
   &:hover
