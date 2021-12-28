@@ -10,3 +10,8 @@
   &:disabled, &[disabled]
     cursor: not-allowed !important
     pointer-events: all !important
+
+@mixin no-wrap-text
+  overflow: hidden !important
+  text-overflow: ellipsis !important
+  white-space: nowrap !important

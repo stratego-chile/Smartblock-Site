@@ -1,6 +1,7 @@
 @use '~bootstrap/scss/bootstrap' as bs
 @use 'styles/colors' as sb_colors
 @use 'styles/mixins' as sb_mixins
+@use 'styles/variables' as sb_vars
 
 body
   margin: 0
@@ -23,9 +24,9 @@ h5, h6
 a
   &:not( .nav-link ):not( .btn ):not( .cursor-pointer )[href]
     text-decoration: none !important
-    color: sb_colors.$light-primary !important
+    color: sb_colors.$light-primary
     &:hover
-      color: sb_colors.$light-primary!important
+      color: sb_colors.$light-primary
 
 // Default modifiers
 ::selection
@@ -52,10 +53,12 @@ a
       color: bs.$black !important
 
 // Custom classes
+.standard-radius
+  border-radius: sb_vars.$default-border-radius
 .input-pill
-  border-radius: 2rem
+  border-radius: sb_vars.$default-border-radius
 .btn-pill
-  border-radius: 2rem
+  border-radius: sb_vars.$default-border-radius
   transition: box-shadow .2s ease in
   &:not( .no-shadow ):hover
     box-shadow: 0 .5rem 1rem rgba( bs.$black, .25 )
