@@ -8,7 +8,7 @@ import { useStyleModules } from 'helpers/props';
 import { useState, useLayoutEffect, MouseEvent, FC, useEffect } from 'react';
 import { Smartblock } from 'types';
 
-const NotificationsWrapper: FC<Smartblock.Types.NotificationsWrapperProps> = ({ showPanel, ...props }) => {
+const NotificationsWrapper: FC<Smartblock.Types.NotificationsWrapperProps> = ({ showPanel, ...props }): JSX.Element => {
   const [showNotifications, setShowNotifications] = useState<boolean>(false);
   const [notifications, setNotifications] = useState<Smartblock.Types.Notification[]>([]);
   const [notificationsToggled, setNotificationsToggled] = useState<boolean>(false);

@@ -4,9 +4,9 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Smartblock } from 'types';
 import { useEffect, useState } from 'react';
 
-const Footer: Smartblock.Types.IsolatedComponent = () => {
+const Footer: Smartblock.Types.IsolatedComponent = (): JSX.Element => {
 
-  const [currentYear, setCurrentYear] = useState<number | null>(null);
+  const [currentYear, setCurrentYear] = useState<number>();
 
   useEffect(() => {
     setCurrentYear(new Date().getFullYear());
