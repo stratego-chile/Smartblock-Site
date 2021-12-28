@@ -2,9 +2,9 @@ import HomeStyles from 'styles/modules/home.module.sass';
 import ContactForm from 'components/forms/contact-form';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { Smartblock } from 'types';
-import Layout from 'helpers/layout';
+import Layout from 'components/utils/layout';
 
-const Home: Smartblock.Types.IsolatedComponent = () => {
+const Home: Smartblock.Types.IsolatedComponent = (): JSX.Element => {
   return (
     <Layout pageTitle='Inicio'>
       <Container className={HomeStyles.banner} fluid>

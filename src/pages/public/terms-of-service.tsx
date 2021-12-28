@@ -1,8 +1,8 @@
 import { Container, Row, Col } from 'react-bootstrap';
 import { Smartblock } from 'types';
-import Layout from 'helpers/layout';
+import Layout from 'components/utils/layout';
 
-const TermsOfService: Smartblock.Types.IsolatedComponent = () => {
+const TermsOfService: Smartblock.Types.IsolatedComponent = (): JSX.Element => {
   return (
     <Layout pageTitle='Términos y condiciones de servicio'>
       <Container className="my-5">

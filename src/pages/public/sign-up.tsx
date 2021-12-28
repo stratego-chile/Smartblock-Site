@@ -1,9 +1,9 @@
 import SignUpForm from 'components/forms/sign-up-form';
-import Layout from 'helpers/layout';
+import Layout from 'components/utils/layout';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Smartblock } from 'types';
 
-const SignUp: Smartblock.Types.IsolatedComponent = () => {
+const SignUp: Smartblock.Types.IsolatedComponent = (): JSX.Element => {
   return (
     <Layout pageTitle='Registro'>
       <Container className="my-5">

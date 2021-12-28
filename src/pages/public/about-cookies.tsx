@@ -1,8 +1,8 @@
 import { Smartblock } from 'types';
 import { Container, Row, Col } from 'react-bootstrap';
-import Layout from 'helpers/layout';
+import Layout from 'components/utils/layout';
 
-const AboutCookies: Smartblock.Types.IsolatedComponent = () => {
+const AboutCookies: Smartblock.Types.IsolatedComponent = (): JSX.Element => {
   return (
     <Layout pageTitle='Cookies'>
       <Container className="my-5">

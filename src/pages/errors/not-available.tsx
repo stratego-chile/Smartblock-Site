@@ -1,8 +1,8 @@
 import { Smartblock } from 'types';
 import { Container, Row, Col } from 'react-bootstrap';
-import Layout from 'helpers/layout';
+import Layout from 'components/utils/layout';
 
-const NotAvailable: Smartblock.Types.IsolatedComponent = () => {
+const NotAvailable: Smartblock.Types.IsolatedComponent = (): JSX.Element => {
   return (
     <Layout pageTitle='Recurso no disponible'>
       <Container className="my-5">

@@ -1,9 +1,9 @@
 import NotFoundStyles from 'styles/modules/error-page.module.sass';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Smartblock } from 'types';
-import Layout from 'helpers/layout';
+import Layout from 'components/utils/layout';
 
-const NotFound: Smartblock.Types.IsolatedComponent = () => {
+const NotFound: Smartblock.Types.IsolatedComponent = (): JSX.Element => {
   return (
     <Layout pageTitle='Recurso no encontrado'>
       <Container className={NotFoundStyles.wrapper}>

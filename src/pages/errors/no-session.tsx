@@ -6,12 +6,12 @@ import { injectQueryParams } from 'helpers/route';
 import { RoutesMap } from 'routes/map';
 import { Hasher } from 'helpers/hasher';
 import { Smartblock } from 'types';
-import Layout from 'helpers/layout';
+import Layout from 'components/utils/layout';
+import { EMPTY_STRING } from 'helpers/constants';
 
-const NoSession: Smartblock.Types.IsolatedComponent = () => {
-
-  const [resource, setResource] = useState<string>('');
-  const [returnUrl, setReturnUrl] = useState<string>('');
+const NoSession: Smartblock.Types.IsolatedComponent = (): JSX.Element => {
+  const [resource, setResource] = useState<string>(EMPTY_STRING);
+  const [returnUrl, setReturnUrl] = useState<string>(EMPTY_STRING);
 
   const checkRequestedResource = () => {
     setResource(window.location.pathname);
