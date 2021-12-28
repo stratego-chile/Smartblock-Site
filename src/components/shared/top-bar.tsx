@@ -2,7 +2,7 @@ import TopBarStyles from 'styles/modules/top-bar.module.sass';
 import SmartblockLogo from 'assets/logos/smartblock-logo.svg';
 import SmartblockIcon from 'assets/logos/smartblock-icon.svg';
 import { useRef, useState, MouseEvent } from 'react';
-import { Navbar, Nav, Container, Image, Alert, Form, Button, Badge } from 'react-bootstrap';
+import { Navbar, Nav, Container, Image, Form, Button, Badge } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Smartblock } from 'types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,9 +10,8 @@ import { faBell as farBell } from '@fortawesome/free-regular-svg-icons';
 import NotificationsWrapper from 'components/shared/notifications-wrapper';
 import { useStyleModules } from 'helpers/props';
 
-const TopBar: Smartblock.Types.IsolatedComponent = () => {
+const TopBar: Smartblock.Types.IsolatedComponent = (): JSX.Element => {
 
-  const [showDevModeAlert, setShowDevModeAlert] = useState<boolean>(true);
   const [collapsed, setCollapsed] = useState<boolean>(true);
   const [notifications, setNotifications] = useState<Smartblock.Types.Notification[]>([]);
   const [showPanel, setShowPanel] = useState<boolean>(false);
@@ -39,13 +38,6 @@ const TopBar: Smartblock.Types.IsolatedComponent = () => {
 
   return (
     <>
-      {
-        showDevModeAlert && process.env.NODE_ENV === 'development'
-          ? <Alert className="sticky-top mb-0" variant="warning" onClose={() => setShowDevModeAlert(false)} dismissible>
-            Esta aplicación está en desarrollo y está sujeto a cambios. Por favor, tenga en consideración que puede ser inestable y presentar comportamientos inesperados.
-          </Alert>
-          : null
-      }
       <Navbar bg="light" expand="lg" className={TopBarStyles.navBar}>
         <Container>
           <span className={TopBarStyles.topBarSpacerHelper} />
