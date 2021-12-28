@@ -2,7 +2,7 @@ import { FC, MouseEvent, useEffect, useState } from 'react';
 import { Button, Offcanvas, Toast, ToastContainer } from 'react-bootstrap';
 import { Smartblock } from 'types';
 
-const NotificationsOffcanvas: FC<Smartblock.Types.NotificationsProps> = (props) => {
+const NotificationsOffcanvas: FC<Smartblock.Types.NotificationsProps> = (props): JSX.Element => {
 
   const [show, setShow] = useState<boolean>(props.showPanel);
   const [notifications, setNotifications] = useState<Smartblock.Types.Notification[]>([]);

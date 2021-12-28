@@ -6,7 +6,7 @@ import { useStyleModules } from 'helpers/props';
 import { Row, Col, Button } from 'react-bootstrap';
 import { Smartblock } from 'types';
 
-const SocialNetworks: FC<Smartblock.Types.SocialNetworksProps> = (props: PropsWithChildren<Smartblock.Types.SocialNetworksProps>) => {
+const SocialNetworks: FC<Smartblock.Types.SocialNetworksProps> = (props: PropsWithChildren<Smartblock.Types.SocialNetworksProps>): JSX.Element => {
 
   const handleOptionSelection = (event: MouseEvent<HTMLButtonElement>) => {
     if (event.isTrusted) {
