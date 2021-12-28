@@ -92,7 +92,7 @@ $top-bar-breakpoint: 'lg'
   @if map.has-key( bs.$grid-breakpoints, $top-bar-breakpoint )
     @media screen and ( max-width: map.get( bs.$grid-breakpoints, $top-bar-breakpoint ) )
       position: absolute
-      display: inline-flex
+      display: flex
       right: auto
       top: .5rem
       width: 4em
@@ -100,10 +100,10 @@ $top-bar-breakpoint: 'lg'
 .notificationBadge
   position: absolute
   display: inline-flex
-  margin-left: -.50rem
+  margin-left: -.6rem
   margin-bottom: -1rem !important
-  height: .8rem !important
-  width: .8rem !important
+  height: .9rem !important
+  width: .7rem !important
 
 .notificationToastContainer
   position: fixed !important
@@ -121,3 +121,10 @@ $top-bar-breakpoint: 'lg'
 .notificationToastHead
   @extend .notificationToastBody
   background-color: rgba( sb_colors.$light-background-primary, .4 )
+
+.sideBarToggler
+  border-radius: 0px 10px 10px 0px !important
+  border-width: 0px !important
+  background-color: sb_colors.$dark-gray !important
+  height: 3rem !important
+  position: absolute
