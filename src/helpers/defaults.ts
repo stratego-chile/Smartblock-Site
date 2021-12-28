@@ -1,3 +1,3 @@
-export const basePageTitle = 'Smartblock Technologies SpA';
+export const BASE_PAGE_TITLE = 'Smartblock Technologies SpA';
 
-export const apiBaseUrl = 'https://api.smartblock.cl';
+export const API_BASE_URL = 'https://api.smartblock.cl';
