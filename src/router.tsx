@@ -60,7 +60,7 @@ const AppRoutes: Smartblock.Types.IsolatedComponent = (): JSX.Element => {
       { /* Default route */ }
       <Route
         path={RoutesMap.default.path}
-        element={RoutesMap.default.useComponent() as JSX.Element} />
+        element={RoutesMap.default.useComponent()} />
     </Routes>
   </BrowserRouter>;
 };
