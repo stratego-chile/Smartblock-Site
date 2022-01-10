@@ -76,7 +76,6 @@ const SideBar: FC<SideBarProps> = (props) => {
           </div>
         )}
       </div>
-      {/* padding: '0rem .5rem' */}
       <div className={useStyleModules('w-100 px-2 py-0')} style={{ lineHeight: '.7' }}>
         <p className={useStyleModules(SideBarStyles.pureLinksContainer, 'mb-4')}>
           <Link
