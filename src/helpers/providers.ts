@@ -11,8 +11,8 @@ axios.interceptors.request.use(
       ? ProvidersHelper.getRequestHeaders()
       : ProvidersHelper.getDefaultRequestHeaders();
     config.headers = {
+      ...extendedHeaders,
       ...config.headers,
-      ...extendedHeaders
     };
     return config;
   },
