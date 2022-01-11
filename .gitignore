@@ -5,6 +5,12 @@
 /.pnp
 .pnp.js
 
+# non-official workflows
+scripts
+
+# non-stable workflows
+.circleci
+
 # testing
 /coverage
 
