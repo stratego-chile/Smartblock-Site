@@ -2584,6 +2584,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/marked@npm:^4":
+  version: 4.0.1
+  resolution: "@types/marked@npm:4.0.1"
+  checksum: c2dabaae5ed5e2806ee3ef7f717ef7fe91ac5ee2718162219dd34de9d684d36efd561987fb3316b659d1add6d432696ca507da04b94380a77aac30870cb276d7
+  languageName: node
+  linkType: hard
+
 "@types/mime@npm:^1":
   version: 1.3.2
   resolution: "@types/mime@npm:1.3.2"
@@ -8594,6 +8601,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"marked@npm:^4.0.9":
+  version: 4.0.9
+  resolution: "marked@npm:4.0.9"
+  bin:
+    marked: bin/marked.js
+  checksum: 1381cfa7f650f9f0b83b449d0561669c9751261035135da7ee7d1612828f7ee338fabb52c435ace471566bb64c12b9509edec36626e838306f4636e71d08aef6
+  languageName: node
+  linkType: hard
+
 "mdn-data@npm:2.0.14":
   version: 2.0.14
   resolution: "mdn-data@npm:2.0.14"
@@ -11744,6 +11760,7 @@ __metadata:
     "@types/jest": ^27.0.3
     "@types/js-sha512": ^0.8.0
     "@types/lodash": ^4.14.178
+    "@types/marked": ^4
     "@types/node": 16.11.17
     "@types/pug": ^2.0.6
     "@types/react": ^17.0.38
@@ -11766,6 +11783,7 @@ __metadata:
     html-minifier-terser: ^7.0.0-alpha.1
     js-sha512: ^0.8.0
     lodash: ^4.17.21
+    marked: ^4.0.9
     pug: ^3.0.2
     react: ^17.0.2
     react-bootstrap: 2.0.4
