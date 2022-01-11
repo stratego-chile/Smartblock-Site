@@ -13,7 +13,7 @@ const Home: Smartblock.Types.IsolatedComponent = (): JSX.Element => {
             <Col>
               <h1 className={HomeStyles.bannerTitle}>Decisiones eficaces, seguimiento incorruptible</h1>
               <h3 className='fw-light'>
-                Estandarice sus flujos de trabajo con proveedores y contrastistas
+                Estandarice sus flujos de trabajo con proveedores y contratistas
               </h3>
             </Col>
           </Row>
@@ -60,7 +60,7 @@ const Home: Smartblock.Types.IsolatedComponent = (): JSX.Element => {
         <Row>
           <Col>
             <h1 className={HomeStyles.sectionTitle}>¿Tienes dudas o necesitas una solución personalizada?</h1>
-            <h5>Contáctanos. Te podemos ayudar.</h5>
+            <h5>Puedes enviarnos un mensaje. Te podemos ayudar.</h5>
           </Col>
         </Row>
         <Row>
