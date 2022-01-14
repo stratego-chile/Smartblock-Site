@@ -74,10 +74,9 @@ const PrivateLayout: FC<PrivateLayoutProps> = (props) => {
       <Container fluid>
         <Row>
           <Col
-            ref={sideBarRef}
             md='5' lg='4' xl='2'
-            className={useStyleModules(showSideBar ? '' : SideBarStyles.noWidth, SideBarStyles.wrapper)}
-            style={{ overflow: 'scroll' }}>
+            className={useStyleModules(showSideBar ? '' : SideBarStyles.noWidth, SideBarStyles.wrapper)} >
+            <SideBar nativeRef={sideBarRef} showSideBar={showSideBar} />
             {
               allowSideBarToggle
                 ? <Button
@@ -92,7 +91,6 @@ const PrivateLayout: FC<PrivateLayoutProps> = (props) => {
                 </Button>
                 : null
             }
-            <SideBar showSideBar={showSideBar} />
           </Col>
           <Col className='p-0'>
             <PrivateTopBar />

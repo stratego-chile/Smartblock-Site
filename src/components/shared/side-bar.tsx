@@ -1,4 +1,4 @@
-import { FC, useState, useLayoutEffect, MouseEvent } from 'react';
+import { FC, useState, useLayoutEffect, MouseEvent, Ref } from 'react';
 import SideBarStyles from 'styles/modules/side-bar.module.sass';
 import { Image, Button } from 'react-bootstrap';
 import { useStyleModules } from 'helpers/props';
@@ -9,13 +9,14 @@ import { Link } from 'react-router-dom';
 
 type SideBarModulesRefs = Record<string, boolean>;
 
-type SideBarProps = {
+export type SideBarProps = {
   showSideBar?: boolean;
+  nativeRef?: Ref<HTMLDivElement>
 };
 
-const SideBar: FC<SideBarProps> = (props) => {
+const SideBar: FC<SideBarProps> = (props: SideBarProps) => {
 
-  const { showSideBar } = props;
+  const { showSideBar, nativeRef } = props;
   
   const [moduleRefs, setModulesRefs] = useState<SideBarModulesRefs>({});
 
@@ -42,10 +43,10 @@ const SideBar: FC<SideBarProps> = (props) => {
   }, []);
 
   return (
-    <div className={SideBarStyles.sideBar}>
-      <div className='d-flex flex-wrap align-items-center' style={{ height: 80 }}>
+    <div ref={nativeRef} className={SideBarStyles.sideBar}>
+      <div className='d-grid d-lg-flex flex-wrap align-items-center' style={{ height: 80 }}>
         <Image
-          className='d-block mx-auto'
+          className='d-block m-auto'
           alt='Smartblock'
           src='https://smartblock-static.s3.amazonaws.com/public-assets/smartblock-logo-white.svg'
           width={247}
@@ -62,7 +63,7 @@ const SideBar: FC<SideBarProps> = (props) => {
                 </span>
               </Button>
             </div>
-            <div className={useStyleModules(moduleRefs[index] ? 'shown' : 'hidden', SideBarStyles.linksContainer, 'mx-2') } >
+            <div className={useStyleModules(moduleRefs[index] ? SideBarStyles.shown : SideBarStyles.hidden, SideBarStyles.linksContainer, 'mx-2') } >
               <ul>
                 {moduleData.subModules.map((subModule, index) =>
                   <li key={index}>
@@ -76,7 +77,7 @@ const SideBar: FC<SideBarProps> = (props) => {
           </div>
         )}
       </div>
-      <div className={useStyleModules('w-100 px-2 py-0')} style={{ lineHeight: '.7' }}>
+      <div className={useStyleModules(SideBarStyles.preFooterLinksWrapper, 'w-100 px-2 py-0')}>
         <p className={useStyleModules(SideBarStyles.pureLinksContainer, 'mb-4')}>
           <Link
             className={useStyleModules(SideBarStyles.pureLink)}
@@ -93,11 +94,11 @@ const SideBar: FC<SideBarProps> = (props) => {
             to='/privacy-policy'>Política de Privacidad</Link>
         </p>
       </div>
-      <div className={useStyleModules(SideBarStyles.pureLinksContainer)} style={{ height: 25, backgroundColor: '#525252', color: '#C4C4C4' }}>
-        <span className='mx-2'>
+      <div className={useStyleModules(SideBarStyles.footer, 'px-2')}>
+        <div className='d-flex justify-content-between'>
           <span>{'Smartblock Web App'}</span>
-          <span className={useStyleModules('float-end me-2')}>{Manifest.version}</span>
-        </span>
+          <span>{Manifest.version}</span>
+        </div>
       </div>
     </div>
   );

@@ -13,6 +13,31 @@ $default-breakpoint: 'lg'
     border-bottom-left-radius: 10px
     border-bottom-right-radius: 10px
 
+@keyframes boxHeightChange
+  0%
+    height: 100%
+  30%
+    height: 75%
+  50%
+    height: 50%
+  80%
+    height: 25%
+  100%
+    height: 0px
+
+.wrapper
+  overflow-y: scroll !important
+  overflow-x: hidden !important
+  transition: all 500ms
+  padding: 0px
+  position: relative
+  display: block
+  z-index: 48
+  @if map.has-key( bs.$grid-breakpoints, $default-breakpoint )
+    @media screen and ( max-width: map.get( bs.$grid-breakpoints, $default-breakpoint ) )
+      position: fixed
+      display: flex
+
 .sideBarToggler
   position: fixed
   width: auto
@@ -23,21 +48,6 @@ $default-breakpoint: 'lg'
   background-color: sb_colors.$dark-gray
   height: 3rem
 
-.wrapper
-  overflow-y: scroll !important
-  overflow-x: hidden !important
-  transition: all .4s
-  padding: 0px
-  position: relative
-  display: block
-  z-index: 48
-  @if map.has-key( bs.$grid-breakpoints, $default-breakpoint )
-    @media screen and ( max-width: map.get( bs.$grid-breakpoints, $default-breakpoint ) )
-      position: fixed
-      display: flex
-  *
-    overflow-x: hidden !important
-
 .sideBar
   position: fixed
   background-color: #373737
@@ -45,11 +55,19 @@ $default-breakpoint: 'lg'
   width: inherit
   display: flex
   flex-direction: column
-  overflow: auto
+  overflow-x: hidden !important
+  overflow-y: auto !important
+  @if map.has-key( bs.$grid-breakpoints, $default-breakpoint )
+    @media screen and ( max-width: map.get( bs.$grid-breakpoints, $default-breakpoint ) )
+      display: block
 
 .sideBarSub
   margin-top: 32px
+  margin-bottom: 1.5rem
   flex-grow: 1
+  @if map.has-key( bs.$grid-breakpoints, $default-breakpoint )
+    @media screen and ( max-width: map.get( bs.$grid-breakpoints, $default-breakpoint ) )
+      display: block
 
 .noWidth
   width: 0px !important
@@ -70,7 +88,7 @@ $default-breakpoint: 'lg'
   height: 50px
   transition: all 0.2s
   animation-name: borderBottomRadiusChange
-  animation-duration: 0.2s
+  animation-duration: 0.4s
   @include sb_mixins.no-wrap-text
   &:hover
     background: lighten(sb_colors.$dark-background-primary, 5%)
@@ -98,20 +116,24 @@ $default-breakpoint: 'lg'
 .linksContainer
   border-radius: 0px 0px 10px 10px
   background-color: sb_colors.$dark-gray
-  -webkit-transition: height 0.8s
-  -moz-transition: height 0.8s
-  transition: height 0.8s ease-in-out
+  transition: all 0.2s
+  animation-name: boxHeightChange
+  animation-duration: 0.2s
   padding-top: .5rem
   padding-bottom: 1rem
   position: relative
   z-index: 12
   @include sb_mixins.no-wrap-text
-  &.shown
-    height: 100%
-  &.hidden
-    height: 0px
   ul
     @extend .simpleList
+
+.shown
+  height: 100%
+
+.hidden
+  height: 0px
+  margin: 0px
+  padding: 0px
 
 .sideBarLink
   color: sb_colors.$gray !important
@@ -132,3 +154,23 @@ $default-breakpoint: 'lg'
 
 .pureLinksContainer
   @include sb_mixins.no-wrap-text
+  line-height: .7
+
+.preFooterLinksWrapper
+  @include sb_mixins.no-wrap-text
+  height: auto !important
+  overflow-y: hidden !important
+  @if map.has-key( bs.$grid-breakpoints, $default-breakpoint )
+    @media screen and ( max-width: map.get( bs.$grid-breakpoints, $default-breakpoint ) )
+      overflow-y: visible !important
+      display: block !important
+
+.footer
+  @include sb_mixins.no-wrap-text
+  // height: 25
+  background-color: #525252
+  color: #C4C4C4
+  @if map.has-key( bs.$grid-breakpoints, $default-breakpoint )
+    @media screen and ( max-width: map.get( bs.$grid-breakpoints, $default-breakpoint ) )
+      overflow-y: visible !important
+      display: block !important
