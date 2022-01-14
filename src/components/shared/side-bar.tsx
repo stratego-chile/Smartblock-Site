@@ -44,9 +44,9 @@ const SideBar: FC<SideBarProps> = (props: SideBarProps) => {
 
   return (
     <div ref={nativeRef} className={SideBarStyles.sideBar}>
-      <div className='d-grid d-lg-flex flex-wrap align-items-center' style={{ height: 80 }}>
+      <div className='d-grid d-lg-flex flex-wrap align-items-center px-3 px-0' style={{ height: 80 }}>
         <Image
-          className='d-block m-auto'
+          className={useStyleModules(SideBarStyles.sideBarLogo, 'd-block m-auto overflow-hidden')}
           alt='Smartblock'
           src='https://smartblock-static.s3.amazonaws.com/public-assets/smartblock-logo-white.svg'
           width={247}
@@ -63,8 +63,8 @@ const SideBar: FC<SideBarProps> = (props: SideBarProps) => {
                 </span>
               </Button>
             </div>
-            <div className={useStyleModules(moduleRefs[index] ? SideBarStyles.shown : SideBarStyles.hidden, SideBarStyles.linksContainer, 'mx-2') } >
-              <ul>
+            <div className={useStyleModules(SideBarStyles.linksContainer, 'mx-2') } >
+              <ul className={useStyleModules(moduleRefs[index] ? SideBarStyles.shown : SideBarStyles.hidden)}>
                 {moduleData.subModules.map((subModule, index) =>
                   <li key={index}>
                     <Link to={subModule.path} className={SideBarStyles.sideBarLink}>
