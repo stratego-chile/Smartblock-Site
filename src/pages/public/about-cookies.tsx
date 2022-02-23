@@ -4,6 +4,7 @@ import Layout from 'components/utils/layout';
 import { useLayoutEffect, useState } from 'react';
 import { ProvidersHelper } from 'helpers/providers';
 import { marked } from 'marked';
+import SuspenseFallback from 'components/utils/suspense-fallback';
 
 const AboutCookies: Smartblock.Types.IsolatedComponent = (): JSX.Element => {
 
@@ -23,7 +24,9 @@ const AboutCookies: Smartblock.Types.IsolatedComponent = (): JSX.Element => {
             {
               typeof remoteFile === 'string'
                 ? <article dangerouslySetInnerHTML={{__html: marked(remoteFile)}}></article>
-                : null
+                : SuspenseFallback(String(), {
+                  useRelativeHeight: true
+                })
             }
           </Col>
         </Row>
