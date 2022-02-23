@@ -5,8 +5,6 @@ const Preferences: Smartblock.Types.IsolatedComponent = (): JSX.Element => {
   return (
     <PrivateLayout pageTitle='Preferencias'>
       <h1>Preferencias</h1>
-      <br />
-      <div style={{ height: '120vh' }} />
     </PrivateLayout>
   );
 };

@@ -102,10 +102,10 @@ const NotificationsWrapper: FC<Smartblock.Types.NotificationsWrapperProps> = ({ 
                   animation={true}
                   onClose={() => { handleSingleNotificationDismiss(key); }} >
                   <Toast.Header className={NotificationsStyles.notificationToastHead}>
-                    <strong className="me-auto">
+                    <strong className='me-auto'>
                       <FontAwesomeIcon icon={faInfoCircle} />&nbsp;{notification.title}
                     </strong>
-                    <small className="text-muted">
+                    <small className='text-muted'>
                       Recibido a las&nbsp;{new Date(notification.timestamp).toLocaleTimeString()}
                     </small>
                   </Toast.Header>
@@ -120,10 +120,10 @@ const NotificationsWrapper: FC<Smartblock.Types.NotificationsWrapperProps> = ({ 
                   <Toast.Header
                     closeButton={false}
                     className={useStyleModules(NotificationsStyles.notificationToastHead, 'justify-content-between')} >
-                    <Button variant="link" size="sm" onClick={showNotificationsInLateralPanel}>
+                    <Button variant='link' size='sm' onClick={showNotificationsInLateralPanel}>
                       Ver todas
                     </Button>
-                    <Button variant="link" size="sm" onClick={dismissAllNotifications}>
+                    <Button variant='link' size='sm' onClick={dismissAllNotifications}>
                       Descartar todas
                     </Button>
                   </Toast.Header>

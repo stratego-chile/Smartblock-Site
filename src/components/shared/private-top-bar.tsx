@@ -24,12 +24,12 @@ const PrivateTopBar: Smartblock.Types.IsolatedComponent = (): JSX.Element => {
     <>
       <Navbar bg='light' className={useStyleModules(PrivateTopBarStyles.navbar, 'shadow')}>
         <Container fluid>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="ms-auto">
+          <Navbar.Toggle aria-controls='basic-navbar-nav' />
+          <Navbar.Collapse id='basic-navbar-nav'>
+            <Nav className='ms-auto'>
               <Nav.Link
                 className='fs-5'
-                href="#"
+                href='#'
                 onClick={toggleNotificationsPanel}>
                 <FiBell />
                 {
@@ -48,13 +48,15 @@ const PrivateTopBar: Smartblock.Types.IsolatedComponent = (): JSX.Element => {
                 className='fs-5'
                 align='end'
                 title={<FiSettings />}
-                id="basic-nav-dropdown">
-                <NavDropdown.Item href="https://app.smartblock.cl/account">Cuenta</NavDropdown.Item>
+                id='basic-nav-dropdown'>
+                <NavDropdown.Item href='https://app.smartblock.cl/account'>Cuenta</NavDropdown.Item>
                 <LinkContainer to={PrivateRoutesMap.preferences.path}>
                   <NavDropdown.Item>Preferencias</NavDropdown.Item>
                 </LinkContainer>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="https://app.smartblock.cl/logout">Cerrar Sesión</NavDropdown.Item>
+                <LinkContainer to='/logout'>
+                  <NavDropdown.Item>Cerrar Sesión</NavDropdown.Item>
+                </LinkContainer>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>

@@ -37,14 +37,14 @@ const NotificationsOffcanvas: FC<Smartblock.Types.NotificationsProps> = (props):
   }, [props]);
 
   return (
-    <Offcanvas show={show} placement="end" onHide={handleClose}>
+    <Offcanvas show={show} placement='end' onHide={handleClose}>
       <Offcanvas.Header closeButton>
         <Offcanvas.Title>Notificaciones</Offcanvas.Title>
       </Offcanvas.Header>
       {
         notifications.filter(notification => !notification.dismissed).length > 0
-          ? <p className="text-end">
-            <Button variant="link" size="sm" onClick={dismissAllNotifications}>
+          ? <p className='text-end'>
+            <Button variant='link' size='sm' onClick={dismissAllNotifications}>
               <small>Ignorar todas</small>
             </Button>
           </p>
@@ -53,10 +53,10 @@ const NotificationsOffcanvas: FC<Smartblock.Types.NotificationsProps> = (props):
       <Offcanvas.Body as={ToastContainer} className='fixed-wrapper'>
         {
           notifications.filter(notification => !notification.dismissed).length === 0
-            ? <Toast className="shadow-none border-0">
+            ? <Toast className='shadow-none border-0'>
               <Toast.Header closeButton={false}></Toast.Header>
               <Toast.Body>
-                <p className="text-muted text-center">No hay notificaciones pendientes</p>
+                <p className='text-muted text-center'>No hay notificaciones pendientes</p>
               </Toast.Body>
             </Toast>
             : notifications
@@ -66,10 +66,10 @@ const NotificationsOffcanvas: FC<Smartblock.Types.NotificationsProps> = (props):
                 animation={false}
                 onClose={() => handleNotificationClose(key)} >
                 <Toast.Header>
-                  <strong className="me-auto">
+                  <strong className='me-auto'>
                     {notification.title}
                   </strong>
-                  <small className="text-muted">
+                  <small className='text-muted'>
                     Recibido a las&nbsp;{new Date(notification.timestamp).toLocaleTimeString()}
                   </small>
                 </Toast.Header>

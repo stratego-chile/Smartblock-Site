@@ -9,7 +9,7 @@ import SocialNetworks from 'components/utils/social-networks';
 import SubmitButton from 'components/utils/submit-button';
 import PasswordField from 'components/utils/password-field';
 
-const SignInForm: FC<Record<string, never>> = (): JSX.Element => {
+const SignInForm: Smartblock.Types.IsolatedComponent = (): JSX.Element => {
 
   const [state, setState] = useState<Smartblock.Types.SignInFormState>({
     username: EMPTY_STRING,

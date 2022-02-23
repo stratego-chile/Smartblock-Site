@@ -8,7 +8,7 @@ const SubmitButton: FC<ButtonProps & Smartblock.Types.SubmitButtonProps> = (prop
   const [state, setState] = useState<Smartblock.Types.SubmitButtonState>({ awaitingResponse: submitting });
   const [isDisabled, setDisabled] = useState<boolean>(false);
 
-  const defaultLoadingContent = <Spinner animation="border" size="sm" />;
+  const defaultLoadingContent = <Spinner animation='border' size='sm' />;
 
   useEffect(() => {
     setState({
@@ -26,7 +26,7 @@ const SubmitButton: FC<ButtonProps & Smartblock.Types.SubmitButtonProps> = (prop
   }, [disabled]);
 
   return (
-    <Button {...buttonProps} type="submit" role="button" disabled={isDisabled}>
+    <Button {...buttonProps} type='submit' role='button' disabled={isDisabled}>
       {state.awaitingResponse ? (loadingContent ?? defaultLoadingContent) : defaultContent}
     </Button>
   );

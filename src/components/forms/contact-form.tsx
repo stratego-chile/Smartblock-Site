@@ -30,33 +30,42 @@ const ContactForm: Smartblock.Types.IsolatedComponent = (): JSX.Element => {
     <Form onChange={handleFormChange} onSubmit={handleFormSubmit}>
       <Row>
         <Col md>
-          <FloatingLabel controlId="firstName" label="Nombre" className="mb-3">
-            <Form.Control type="text" placeholder="Nombre" />
+          <FloatingLabel
+            controlId='firstName'
+            label='Nombre'
+            className='mb-3'>
+            <Form.Control type='text' placeholder='Nombre' disabled />
           </FloatingLabel>
         </Col>
         <Col md>
-          <FloatingLabel controlId="lastName" label="Apellido" className="mb-3">
-            <Form.Control type="text" placeholder="Apellido" />
+          <FloatingLabel
+            controlId='lastName'
+            label='Apellido'
+            className='mb-3'>
+            <Form.Control type='text' placeholder='Apellido' disabled />
           </FloatingLabel>
         </Col>
       </Row>
       <Row>
         <Col>
-          <FloatingLabel controlId="email" label="Correo Electrónico" className="mb-3">
-            <Form.Control type="email" placeholder="Correo Electrónico" />
+          <FloatingLabel
+            controlId='email'
+            label='Correo Electrónico'
+            className='mb-3'>
+            <Form.Control type='email' placeholder='Correo Electrónico' disabled />
           </FloatingLabel>
         </Col>
       </Row>
       <Row>
         <Col>
-          <FloatingLabel controlId="message" label="Mensaje" className="mb-3">
-            <Form.Control className={ContactFormStyles.messageField} type="text" as="textarea" rows={4} placeholder="Mensaje" />
+          <FloatingLabel controlId='message' label='Mensaje' className='mb-3'>
+            <Form.Control className={ContactFormStyles.messageField} type='text' as='textarea' rows={4} placeholder='Mensaje' disabled />
           </FloatingLabel>
         </Col>
       </Row>
       <Row>
-        <Col className="text-center">
-          <Button variant="dark" size="lg" type="submit" className="btn-pill" disabled={state?.isSubmitting}>
+        <Col className='text-center'>
+          <Button variant='dark' size='lg' type='submit' className='btn-pill' disabled={state?.isSubmitting || true}>
             Enviar
           </Button>
         </Col>

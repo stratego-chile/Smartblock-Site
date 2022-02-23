@@ -17,18 +17,18 @@ const Footer: Smartblock.Types.IsolatedComponent = (): JSX.Element => {
       <Row className={FooterStyles.footerContentWrapper}>
         <Container>
           <Row className={FooterStyles.linkWrapper}>
-            <Col sm="12" lg="auto" className={FooterStyles.footerLink}>
-              <LinkContainer to="/tos">
+            <Col sm='12' lg='auto' className={FooterStyles.footerLink}>
+              <LinkContainer to='/tos'>
                 <a>Términos y condiciones</a>
               </LinkContainer>
             </Col>
-            <Col sm="12" lg="auto" className={FooterStyles.footerLink}>
-              <LinkContainer to="/pp">
+            <Col sm='12' lg='auto' className={FooterStyles.footerLink}>
+              <LinkContainer to='/pp'>
                 <a>Política de privacidad</a>
               </LinkContainer>
             </Col>
-            <Col sm="12" lg="auto" className={FooterStyles.footerLink}>
-              <LinkContainer to="/ac">
+            <Col sm='12' lg='auto' className={FooterStyles.footerLink}>
+              <LinkContainer to='/ac'>
                 <a>Sobre las Cookies</a>
               </LinkContainer>
             </Col>

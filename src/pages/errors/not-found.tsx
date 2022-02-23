@@ -7,9 +7,9 @@ const NotFound: Smartblock.Types.IsolatedComponent = (): JSX.Element => {
   return (
     <Layout pageTitle='Recurso no encontrado'>
       <Container className={NotFoundStyles.wrapper}>
-        <Row className="h-100 align-content-center">
+        <Row className='h-100 align-content-center'>
           <Col>
-            <h1 className="text-center">Recurso no encontrado</h1>
+            <h1 className='text-center'>Recurso no encontrado</h1>
           </Col>
         </Row>
       </Container>

@@ -17,7 +17,7 @@ const TermsOfService: Smartblock.Types.IsolatedComponent = (): JSX.Element => {
 
   return (
     <Layout pageTitle='Términos y condiciones de servicio'>
-      <Container className="my-5">
+      <Container className='my-5'>
         <Row>
           <Col>
             {

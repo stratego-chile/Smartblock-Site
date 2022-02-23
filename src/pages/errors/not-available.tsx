@@ -5,9 +5,9 @@ import Layout from 'components/utils/layout';
 const NotAvailable: Smartblock.Types.IsolatedComponent = (): JSX.Element => {
   return (
     <Layout pageTitle='Recurso no disponible'>
-      <Container className="my-5">
+      <Container className='my-5'>
         <Row>
-          <Col className="text-center">
+          <Col className='text-center'>
             <h1>Resource not available. Please, try again later</h1>
           </Col>
         </Row>

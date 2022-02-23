@@ -94,45 +94,45 @@ const SignUpForm: Smartblock.Types.IsolatedComponent = (): JSX.Element => {
   return (
     <Form onSubmit={handleFormSubmit} onChange={handleFormChange}>
       <Row>
-        <Col className="text-center my-5">
+        <Col className='text-center my-5'>
           <h2>Crea una cuenta gratuita</h2>
         </Col>
       </Row>
       <Row>
         <Col>
-          <FloatingLabel controlId="username" label="Nombre de usuario" className="mb-3">
-            <Form.Control type="text" placeholder="Nombre de usuario" />
+          <FloatingLabel controlId='username' label='Nombre de usuario' className='mb-3'>
+            <Form.Control type='text' placeholder='Nombre de usuario' />
           </FloatingLabel>
         </Col>
       </Row>
       <Row>
         <Col>
-          <FloatingLabel controlId="email" label="Correo Electrónico" className="mb-3">
-            <Form.Control type="email" placeholder="Correo Electrónico" />
+          <FloatingLabel controlId='email' label='Correo Electrónico' className='mb-3'>
+            <Form.Control type='email' placeholder='Correo Electrónico' />
           </FloatingLabel>
         </Col>
       </Row>
       <Row>
         <Col>
-          <PasswordField controlId="password" label="Contraseña" hideToggler={!state.password} />
+          <PasswordField controlId='password' label='Contraseña' hideToggler={!state.password} />
         </Col>
       </Row>
       <Row>
         <Col>
-          <PasswordField controlId="passwordConfirm" label="Confirma tu contraseña" compareWith={state.password} hideToggler={false} hidden={!state.password} />
+          <PasswordField controlId='passwordConfirm' label='Confirma tu contraseña' compareWith={state.password} hideToggler={false} hidden={!state.password} />
         </Col>
       </Row>
-      <Row className="my-4">
-        <Col className="d-grid gap-3">
+      <Row className='my-4'>
+        <Col className='d-grid gap-3'>
           <SubmitButton
-            variant="dark"
-            size="lg"
-            className="btn-pill"
-            defaultContent="Registrarme"
+            variant='dark'
+            size='lg'
+            className='btn-pill'
+            defaultContent='Registrarme'
             disabled={!isFormValid}
             submitting={!!state.isSubmitting} />
           <LinkContainer to={'/sign-in' + injectQueryParams({ r: true })}>
-            <Button variant="outline-secondary" type="button" role="button" size="lg" className="btn-pill">
+            <Button variant='outline-secondary' type='button' role='button' size='lg' className='btn-pill'>
               Ya tengo cuenta
             </Button>
           </LinkContainer>

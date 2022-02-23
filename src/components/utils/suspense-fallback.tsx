@@ -9,7 +9,7 @@ const SuspenseFallback = (descriptorText?: string): JSX.Element => {
         <Col>
           <BallTriangle
             wrapperClass='w-100 justify-content-center'
-            arialLabel='loading'
+            ariaLabel='loading'
             height='100'
             width='100'
             color='#5A5A5A' />

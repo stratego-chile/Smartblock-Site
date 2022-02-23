@@ -17,7 +17,7 @@ const AboutCookies: Smartblock.Types.IsolatedComponent = (): JSX.Element => {
 
   return (
     <Layout pageTitle='Cookies'>
-      <Container className="my-5">
+      <Container className='my-5'>
         <Row>
           <Col>
             {

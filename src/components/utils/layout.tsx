@@ -25,7 +25,7 @@ const Layout: FC<LayoutProps> = ({ pageTitle, children, ...divProps }: PropsWith
     <>
       {
         showDevModeAlert && process.env.NODE_ENV !== 'production'
-          ? <Alert className="sticky-top mb-0 fixed-top" variant="warning" onClose={() => setShowDevModeAlert(false)} dismissible>
+          ? <Alert className='sticky-top mb-0 fixed-top' variant='warning' onClose={() => setShowDevModeAlert(false)} dismissible>
             Esta aplicación está en desarrollo y está sujeto a cambios. Por favor, tenga en consideración que puede ser inestable y presentar comportamientos inesperados.
           </Alert>
           : null

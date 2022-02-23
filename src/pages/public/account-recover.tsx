@@ -1,9 +1,7 @@
 import { Smartblock } from 'types';
 
 const AccountRecover: Smartblock.Types.IsolatedComponent = () => {
-  return (
-    <></>
-  );
+  return (null);
 };
 
 export default AccountRecover;

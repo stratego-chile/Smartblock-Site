@@ -17,7 +17,7 @@ const PrivacyPolicy: Smartblock.Types.IsolatedComponent = (): JSX.Element => {
 
   return (
     <Layout pageTitle='Política de privacidad'>
-      <Container className="my-5">
+      <Container className='my-5'>
         <Row>
           <Col>
             {

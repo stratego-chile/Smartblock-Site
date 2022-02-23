@@ -25,8 +25,8 @@ const NoSession: Smartblock.Types.IsolatedComponent = (): JSX.Element => {
   return (
     <Layout pageTitle='Recurso innaccesible'>
       <Container className={NoSessionStyles.wrapper}>
-        <Row className="h-100 align-content-center">
-          <Col className="text-center">
+        <Row className='h-100 align-content-center'>
+          <Col className='text-center'>
             <h1>El recurso solicitado no se encuentra disponible o no cuentas con los permisos necesarios</h1>
             <br />
             <h5>

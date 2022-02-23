@@ -22,27 +22,27 @@ const SocialNetworks: FC<Smartblock.Types.SocialNetworksProps> = (props: PropsWi
   return (
     <>
       <Row>
-        <Col className="text-center my-4">
+        <Col className='text-center my-4'>
           <h5>O accede con</h5>
         </Col>
       </Row>
       <Row>
-        <Col className="text-center">
+        <Col className='text-center'>
           <Button
-            type="button"
-            role="button"
+            type='button'
+            role='button'
             className={useStyleModules(SocialNetworksStyles.socialNetworkSignInButton, SocialNetworksStyles.btnLinkedIn)}
-            size="lg"
-            aria-details="linkedin"
+            size='lg'
+            aria-details='linkedin'
             onClick={handleOptionSelection}>
             <FontAwesomeIcon icon={faLinkedin} /><span className={SocialNetworksStyles.socialNetworkName}>Linkedin</span>
           </Button>
           <Button
-            type="button"
-            role="button"
+            type='button'
+            role='button'
             className={useStyleModules(SocialNetworksStyles.socialNetworkSignInButton, SocialNetworksStyles.btnSlack)}
-            size="lg"
-            aria-details="slack"
+            size='lg'
+            aria-details='slack'
             onClick={handleOptionSelection}>
             <FontAwesomeIcon icon={faSlack} /><span className={SocialNetworksStyles.socialNetworkName}>Slack</span>
           </Button>

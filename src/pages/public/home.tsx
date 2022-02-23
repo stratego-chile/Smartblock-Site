@@ -48,7 +48,12 @@ const Home: Smartblock.Types.IsolatedComponent = (): JSX.Element => {
             <Col>
               <h1 className={HomeStyles.sectionTitle}>Prueba la app. Rápido y no necesitas registrarte</h1>
               <h5>
-                <Button variant='light' size='lg' className='btn-pill mt-4' href='//app.smartblock.cl/preview?mode=try-out&ref=home-try'>
+                <Button
+                  variant='light'
+                  size='lg'
+                  className='btn-pill mt-4'
+                  href='//app.smartblock.cl/preview?mode=try-out&ref=home-try'
+                  disabled>
                   Iniciar sesión de prueba
                 </Button>
               </h5>
