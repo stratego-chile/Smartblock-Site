@@ -1,11 +1,16 @@
+import { useStyleModules } from 'helpers/props';
 import { Container, Row, Col } from 'react-bootstrap';
 import { BallTriangle } from 'react-loader-spinner';
 import SplashScreenStyles from 'styles/modules/splash-screen.module.sass';
 
-const SuspenseFallback = (descriptorText?: string): JSX.Element => {
+export type SuspenseFallbackOptions = {
+  useRelativeHeight?: boolean;
+};
+
+const SuspenseFallback = (descriptorText?: string, options?: SuspenseFallbackOptions): JSX.Element => {
   return (
     <Container className={descriptorText ? SplashScreenStyles.innerWrapper : SplashScreenStyles.wrapper}>
-      <Row className='h-100 align-content-center'>
+      <Row className={useStyleModules('align-content-center', options?.useRelativeHeight ? 'h-auto' : 'h-100')}>
         <Col>
           <BallTriangle
             wrapperClass='w-100 justify-content-center'
