@@ -1,13 +1,10 @@
-import { lazy } from 'react';
 import { Smartblock } from 'types';
 import Home from 'pages/public/home';
 import PrivacyPolicy from 'pages/public/privacy-policy';
 import TermsOfService from 'pages/public/terms-of-service';
 import AboutCookies from 'pages/public/about-cookies';
 import NotAvailable from 'pages/errors/not-available';
-
-const LazySignUP: Smartblock.Types.LazyComponent = lazy(() => import('pages/public/sign-up'));
-const LazySignIn: Smartblock.Types.LazyComponent = lazy(() => import('pages/public/sign-in'));
+import OutsideRedirect from 'components/utils/outside-redirect';
 
 export const PublicRoutesMap: Smartblock.Types.RoutesMapper = {
   home: {
@@ -58,7 +55,7 @@ export const PublicRoutesMap: Smartblock.Types.RoutesMapper = {
     public: true,
     strict: true,
     isLazy: true,
-    useComponent: () => <LazySignUP />,
+    useComponent: () => <OutsideRedirect useAppPath path='/sign-up' />,
     symlinks: [
       '/register',
       '/registrar',
@@ -70,7 +67,7 @@ export const PublicRoutesMap: Smartblock.Types.RoutesMapper = {
     public: true,
     strict: true,
     isLazy: true,
-    useComponent: () => <LazySignIn />,
+    useComponent: () => <OutsideRedirect useAppPath path='/sign-in' />,
     symlinks: [
       '/login',
       '/entrar',
