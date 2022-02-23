@@ -1,19 +1,11 @@
 import SideBarStyles from 'styles/modules/side-bar.module.sass';
 import useBreadcrumbs, { BreadcrumbsRoute } from 'use-react-router-breadcrumbs';
-import { Alert, Col, Container, Row, Button } from 'react-bootstrap';
+import { Alert, Col, Container, Row } from 'react-bootstrap';
 import PrivateTopBar from 'components/shared/private-top-bar';
-import {
-  FC,
-  useEffect,
-  useState,
-  MouseEvent,
-  Fragment
-} from 'react';
+import { FC, useEffect, useState, Fragment } from 'react';
 import { Title } from 'helpers/pager';
 import { useStyleModules } from 'helpers/props';
-import { BsChevronDoubleLeft, BsChevronDoubleRight } from 'react-icons/bs';
 import { RoutesMap } from 'routes/map';
-import { useMeasure } from 'react-use';
 import SideBar from 'components/shared/side-bar';
 
 type PrivateLayoutProps = {
@@ -38,25 +30,8 @@ const PrivateLayout: FC<PrivateLayoutProps> = (props) => {
     }
   );
 
-  const [sideBarRef, sideBarDimensions] = useMeasure<HTMLDivElement>();
-
   const [showDevModeAlert, setShowDevModeAlert] = useState<boolean>(false);
   const [showSideBar, setShowSideBar] = useState<boolean>(true);
-  const [sideBarWidth, setSideBarWidth] = useState<number>(0);
-
-  const toggleSideBarVisibility = (event: MouseEvent) => {
-    if (event.isTrusted) {
-      setShowSideBar(!showSideBar);
-    }
-  };
-
-  const adjustSideBarWidth = (width: number) => {
-    setSideBarWidth(width);
-  };
-
-  useEffect(() => {
-    adjustSideBarWidth(sideBarDimensions.width);
-  }, [sideBarDimensions.width]);
 
   useEffect(() => {
     Title.set(pageTitle);
@@ -76,21 +51,7 @@ const PrivateLayout: FC<PrivateLayoutProps> = (props) => {
           <Col
             md='5' lg='4' xl='2'
             className={useStyleModules(showSideBar ? '' : SideBarStyles.noWidth, SideBarStyles.wrapper)} >
-            <SideBar nativeRef={sideBarRef} showSideBar={showSideBar} />
-            {
-              allowSideBarToggle
-                ? <Button
-                  variant='dark'
-                  className={useStyleModules(SideBarStyles.sideBarToggler, 'no-shadow')}
-                  style={{ left: sideBarWidth }}
-                  onClick={toggleSideBarVisibility}
-                  role='button'
-                  type='button'
-                  size='sm'>
-                  {showSideBar ? <BsChevronDoubleLeft /> : <BsChevronDoubleRight />}
-                </Button>
-                : null
-            }
+            <SideBar onSideBarClose={setShowSideBar} showToggler={allowSideBarToggle} />
           </Col>
           <Col className='p-0'>
             <PrivateTopBar />
@@ -102,7 +63,7 @@ const PrivateLayout: FC<PrivateLayoutProps> = (props) => {
                       {breadcrumbs.map(({ breadcrumb }) => breadcrumb)}
                     </Fragment>
                   </Col>
-                  <Col className='bg-light standard-radius' style={{ paddingLeft: 25, paddingTop: 15, paddingBottom: 15 }}>
+                  <Col className='bg-light standard-radius p-4'>
                     {children}
                   </Col>
                 </Col>

@@ -1,24 +1,31 @@
-import { FC, useState, useLayoutEffect, MouseEvent, Ref } from 'react';
+import { FC, useState, useLayoutEffect, MouseEvent, useEffect } from 'react';
 import SideBarStyles from 'styles/modules/side-bar.module.sass';
 import { Image, Button } from 'react-bootstrap';
 import { useStyleModules } from 'helpers/props';
 import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
-import { SideBarData } from 'components/utils/sidebar-links';
+import { SideBarData } from 'helpers/sidebar-links';
+import { BsChevronDoubleLeft, BsChevronDoubleRight } from 'react-icons/bs';
 import Manifest from '../../../package.json';
 import { Link } from 'react-router-dom';
+import { useMeasure } from 'react-use';
 
 type SideBarModulesRefs = Record<string, boolean>;
 
 export type SideBarProps = {
-  showSideBar?: boolean;
-  nativeRef?: Ref<HTMLDivElement>
+  onSideBarClose?: (state: boolean) => void;
+  showToggler?: boolean;
 };
 
 const SideBar: FC<SideBarProps> = (props: SideBarProps) => {
 
-  const { showSideBar, nativeRef } = props;
+  const { onSideBarClose, showToggler = true } = props;
+
+  const [sideBarRef, sideBarDimensions] = useMeasure<HTMLDivElement>();
   
   const [moduleRefs, setModulesRefs] = useState<SideBarModulesRefs>({});
+  const [showSideBar, setShowSideBar] = useState<boolean>(true);
+  const [sideBarWidth, setSideBarWidth] = useState<number>();
+  const [isSideBarFullScreen, setSideBarFullScreen] = useState<boolean>();
 
   const toggleSubModuleVisibility = (event: MouseEvent) => {
     if (event.isTrusted) {
@@ -32,6 +39,32 @@ const SideBar: FC<SideBarProps> = (props: SideBarProps) => {
     }
   };
 
+  const toggleSideBarVisibility = (event: MouseEvent) => {
+    if (event.isTrusted) {
+      setShowSideBar(!showSideBar);
+    }
+  };
+
+  const adjustSideBarWidth = (width: number) => {
+    setSideBarWidth(width);
+  };
+
+  useEffect(() => {
+    if (sideBarWidth) {
+      setSideBarFullScreen(sideBarDimensions.width === window.outerWidth);
+    }
+  }, [sideBarWidth]);
+
+  useEffect(() => {
+    if (onSideBarClose) {
+      onSideBarClose(showSideBar);
+    }
+  }, [showSideBar]);
+
+  useLayoutEffect(() => {
+    adjustSideBarWidth(sideBarDimensions.width);
+  }, [sideBarDimensions.width]);
+
   useLayoutEffect(() => {
     const newModulesRefs: SideBarModulesRefs = { };
     SideBarData.forEach((_data, index) => {
@@ -43,7 +76,25 @@ const SideBar: FC<SideBarProps> = (props: SideBarProps) => {
   }, []);
 
   return (
-    <div ref={nativeRef} className={SideBarStyles.sideBar}>
+    <div ref={sideBarRef} className={useStyleModules(SideBarStyles.sideBar)} >
+      {
+        showToggler && typeof sideBarWidth !== 'undefined'
+          ? <Button
+            variant='dark'
+            className={useStyleModules(
+              SideBarStyles.sideBarToggler,
+              isSideBarFullScreen ? SideBarStyles.sideBarTogglerFullWidth : String(),
+              'no-shadow'
+            )}
+            style={ isSideBarFullScreen ? { right: 0 } : { left: sideBarWidth }}
+            onClick={toggleSideBarVisibility}
+            role='button'
+            type='button'
+            size='sm'>
+            {showSideBar ? <BsChevronDoubleLeft /> : <BsChevronDoubleRight />}
+          </Button>
+          : null
+      }
       <div className='d-grid d-lg-flex flex-wrap align-items-center px-3 px-0' style={{ height: 80 }}>
         <Image
           className={useStyleModules(SideBarStyles.sideBarLogo, 'd-block m-auto overflow-hidden')}
