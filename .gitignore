@@ -8,9 +8,6 @@
 # non-official workflows
 scripts
 
-# non-stable workflows
-.circleci
-
 # testing
 /coverage
 
