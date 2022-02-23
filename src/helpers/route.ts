@@ -2,13 +2,21 @@ export class RouteAnalyzerHelper {
 
   private static _currentPath = () => window.location.pathname;
 
-  public static isPathEqualsTo(path: string): boolean {
+  static isPathEqualsTo(path: string): boolean {
     if (path.includes(':')) {
       path = path.split(':').pop() as string;
     }
     return RouteAnalyzerHelper._currentPath().includes(path);
   }
 }
+
+export const determineBaseUrlContext = () => {
+  const { host } = window.location;
+  if (host.includes('beta.') || host.includes('localhost')) {
+    return 'https://beta.app.smartblock.cl';
+  }
+  return 'https://app.smartblock.cl';
+};
 
 export const injectQueryParams = (params: { [param: string]: string | number | boolean }): string => {
   let queryParams = '';
