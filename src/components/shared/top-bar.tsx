@@ -38,18 +38,18 @@ const TopBar: Smartblock.Types.IsolatedComponent = (): JSX.Element => {
 
   return (
     <>
-      <Navbar bg="light" expand="lg" className={TopBarStyles.navBar}>
+      <Navbar bg='light' expand='lg' className={TopBarStyles.navBar}>
         <Container>
           <span className={TopBarStyles.topBarSpacerHelper} />
-          <LinkContainer to="/home">
+          <LinkContainer to='/home'>
             <Navbar.Brand>
-              <Image className={useStyleModules(TopBarStyles.topBarLogo, 'd-none', 'd-lg-inline-block')} src={SmartblockLogo} alt="Smartblock Tech SpA" />
-              <Image className={useStyleModules(TopBarStyles.topBarLogo, 'd-inline-block', 'd-lg-none')} src={SmartblockIcon} alt="Smartblock Tech SpA" />
+              <Image className={useStyleModules(TopBarStyles.topBarLogo, 'd-none', 'd-lg-inline-block')} src={SmartblockLogo} alt='Smartblock Tech SpA' />
+              <Image className={useStyleModules(TopBarStyles.topBarLogo, 'd-inline-block', 'd-lg-none')} src={SmartblockIcon} alt='Smartblock Tech SpA' />
             </Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle
             ref={togglerRef}
-            aria-controls="topBarMainMenu"
+            aria-controls='topBarMainMenu'
             className={TopBarStyles.navBarToggler}
             aria-expanded={!collapsed}
             onClick={handleCollapseButtonClick}>
@@ -57,35 +57,35 @@ const TopBar: Smartblock.Types.IsolatedComponent = (): JSX.Element => {
             <span className={!collapsed ? TopBarStyles.middleBar : TopBarStyles.middleBarExpanded} />
             <span className={!collapsed ? TopBarStyles.bottomBar : TopBarStyles.bottomBarExpanded} />
           </Navbar.Toggle>
-          <Navbar.Collapse id="topBarMainMenu" className={TopBarStyles.topBarMainMenu}>
-            <Nav className="me-auto">
-              <LinkContainer to="/home">
+          <Navbar.Collapse id='topBarMainMenu' className={TopBarStyles.topBarMainMenu}>
+            <Nav className='me-auto'>
+              <LinkContainer to='/home'>
                 <Nav.Link onClick={handleNavBarLinkClick}>Inicio</Nav.Link>
               </LinkContainer>
             </Nav>
-            <Nav className="ms-auto">
-              <LinkContainer to="/sign-up">
+            <Nav className='ms-auto'>
+              <LinkContainer to='/sign-up'>
                 <Nav.Link onClick={handleNavBarLinkClick}>Registrarme</Nav.Link>
               </LinkContainer>
-              <LinkContainer to="/sign-in">
+              <LinkContainer to='/sign-in'>
                 <Nav.Link onClick={handleNavBarLinkClick}>Iniciar Sesión</Nav.Link>
               </LinkContainer>
             </Nav>
           </Navbar.Collapse>
           <Form className={TopBarStyles.notificationIndicator}>
             <Button
-              variant="light"
-              className="btn-pill no-shadow"
+              variant='light'
+              className='btn-pill no-shadow'
               onClick={toggleNotificationsPanel}
-              role="button"
-              type="button"
-              size="lg">
+              role='button'
+              type='button'
+              size='lg'>
               <FontAwesomeIcon icon={farBell} />
               {
                 notifications.filter(notification => !notification.dismissed).length > 0
                   ? <sup>
                     <small className={TopBarStyles.notificationBadge}>
-                      <Badge pill bg="danger">
+                      <Badge pill bg='danger'>
                         {
                           notifications.filter(not => !not.dismissed).length > 9
                             ? '9+'
